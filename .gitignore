@@ -1,0 +1,7 @@
+# files you don't want in your repo
+tmp/*
+!tmp/.gitkeep
+node_modules
+dist
+
+.env
