@@ -40,7 +40,6 @@
     "eslint-plugin-import-helpers": "^1.2.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
-    "git-commit-msg-linter": "^4.0.7",
     "husky": "^7.0.0",
     "lint-staged": "^12.3.3",
     "prisma": "^3.9.2",
