@@ -6,7 +6,14 @@
   "scripts": {
     "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --watch src --respawn --clear src/infra/express/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
-    "start": "NODE_ENV=production node dist/infra/express/server.js"
+    "start": "NODE_ENV=production node dist/infra/express/server.js",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "dependencies": {
     "@prisma/client": "^3.9.2",
@@ -34,6 +41,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "git-commit-msg-linter": "^4.0.7",
+    "husky": "^7.0.0",
+    "lint-staged": "^12.3.3",
     "prisma": "^3.9.2",
     "ts-node-dev": "^1.1.8",
     "tsconfig-paths": "^3.12.0",
