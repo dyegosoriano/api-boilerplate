@@ -3,11 +3,11 @@ import { NextFunction, Request, Response } from 'express'
 import { AppError } from '@shared/errors/AppError'
 
 export default {
-  notFound(req: Request, res: Response, next: NextFunction) {
+  notFound (_req: Request, _res: Response, _next: NextFunction) {
     throw new AppError('Not found', 404)
   },
 
-  globalErrors(err: Error, req: Request, res: Response, next: NextFunction) {
+  globalErrors (err: Error, _req: Request, res: Response, _next: NextFunction) {
     if (err instanceof AppError) {
       return res.status(err.statusCode).json({
         status: 'error',
@@ -17,6 +17,6 @@ export default {
 
     console.log(`error.message >>> ${err.message} <<<`)
 
-    res.status(500).json({ status: 'error', message: `Internal server error` })
+    res.status(500).json({ status: 'error', message: 'Internal server error' })
   }
 }
