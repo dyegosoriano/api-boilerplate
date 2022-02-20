@@ -1,7 +1,11 @@
+import 'reflect-metadata'
+
 import express from 'express'
 
 import errorHandling from './middlewares/errorHandling'
 import { routes } from './routes'
+
+import '@shared/container'
 
 const app = express()
 
