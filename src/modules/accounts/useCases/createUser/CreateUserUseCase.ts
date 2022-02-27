@@ -9,10 +9,8 @@ import { AppError } from '@shared/errors/AppError'
 @injectable()
 class CreateUserUseCase {
   constructor (
-    @inject('UsersRepository')
-    private usersRepository: IUsersRepository,
-    @inject('HashProvider')
-    private hashProvider: IHashProvider
+    @inject('UsersRepository') private readonly usersRepository: IUsersRepository,
+    @inject('HashProvider') private readonly hashProvider: IHashProvider
   ) {}
 
   async execute ({ password, email, name }: ICreateUserDTO): Promise<IUser> {
