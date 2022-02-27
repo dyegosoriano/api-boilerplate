@@ -1,4 +1,9 @@
 {
   "editor.formatOnPaste": false,
-  "editor.formatOnSave": false
+  "editor.formatOnSave": false,
+  "[prisma]": { 
+    "editor.defaultFormatter": "Prisma.prisma",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+   },
 }
