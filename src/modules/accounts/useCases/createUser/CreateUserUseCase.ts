@@ -1,8 +1,10 @@
 import { inject, injectable } from 'tsyringe'
 
 import { ICreateUserDTO } from '@modules/accounts/domains/DTOs/ICreateUserDTO'
-import { IUser } from '@modules/accounts/domains/models/IUser'
+import { IUserResponseDTO } from '@modules/accounts/domains/DTOs/IUserResponseDTO'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
+import { UserMap } from '@modules/accounts/mappers/UserMap'
+import { validationCreateUser } from '@modules/accounts/validations/validationCreateUser'
 import { IHashProvider } from '@shared/container/providers/HashProvider/models/IHashProvider'
 import { AppError } from '@shared/errors/AppError'
 
@@ -13,7 +15,9 @@ class CreateUserUseCase {
     @inject('HashProvider') private readonly hashProvider: IHashProvider
   ) {}
 
-  async execute ({ password, email, name }: ICreateUserDTO): Promise<IUser> {
+  async execute ({ password, email, name }: ICreateUserDTO): Promise<IUserResponseDTO> {
+    await validationCreateUser.validate({ password, email, name })
+
     const userAlreadyExists = await this.usersRepository.findByEmail(email)
     if (userAlreadyExists) throw new AppError('User already exists')
 
@@ -21,7 +25,7 @@ class CreateUserUseCase {
 
     const user = await this.usersRepository.create({ password: hashedPassword, email, name })
 
-    return user
+    return UserMap.toDTO(user)
   }
 }
 
