@@ -1,1 +1,2 @@
 import './HashProvider'
+import './DateProvider'
