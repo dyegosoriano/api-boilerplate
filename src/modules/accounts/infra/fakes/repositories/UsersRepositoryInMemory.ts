@@ -4,24 +4,22 @@ import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersR
 import { User } from '@modules/accounts/entities/Users'
 
 class UsersRepositoryInMemory implements IUsersRepository {
-  private users: IUser[] = []
+  private repository: IUser[] = []
 
   async create ({ password, email, name }: ICreateUserDTO): Promise<IUser> {
     const user = new User()
-
     Object.assign(user, { password, email, name })
-
-    this.users.push(user)
+    this.repository.push(user)
 
     return user
   }
 
-  async findByEmail (email: string): Promise<IUser> {
-    return this.users.find(user => user.email === email) as IUser
+  async findByEmail (email: string): Promise<User> {
+    return this.repository.find(user => user.email === email) as IUser
   }
 
   async findById (id: string): Promise<IUser> {
-    return this.users.find(user => user.id === id) as IUser
+    return this.repository.find(user => user.id === id) as IUser
   }
 }
 

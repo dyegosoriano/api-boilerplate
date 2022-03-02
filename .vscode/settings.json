@@ -5,5 +5,8 @@
     "editor.defaultFormatter": "Prisma.prisma",
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
-   },
+  },
+  "cSpell.words": [
+    "dayjs"
+  ],
 }
