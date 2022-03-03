@@ -14,11 +14,11 @@ class UsersRepository implements IUsersRepository {
   }
 
   async findByEmail (email: string): Promise<IUser> {
-    return (await prismaClient.users.findFirst({ where: { email } })) as IUser
+    return await prismaClient.users.findFirst({ where: { email } }) as IUser
   }
 
   async findById (id: string): Promise<IUser> {
-    return (await prismaClient.users.findFirst({ where: { id } })) as IUser
+    return await prismaClient.users.findFirst({ where: { id } }) as IUser
   }
 }
 
