@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
+import { ValidationError } from 'yup'
 
 import { AppError } from '@shared/errors/AppError'
 
@@ -12,6 +13,16 @@ export default {
       return res.status(err.statusCode).json({
         status: 'error',
         message: err.message
+      })
+    }
+
+    if (err instanceof ValidationError) {
+      return res.status(400).json({
+        status: 'error',
+        message: {
+          errors: err.message,
+          path: err.path
+        }
       })
     }
 
