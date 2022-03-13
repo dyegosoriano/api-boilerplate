@@ -7,7 +7,7 @@
     "node": ">=16"
   },
   "scripts": {
-    "dev:server": "ts-node-dev --inspect --respawn --watch 'src/**' --transpile-only --ignore-watch node_modules -r tsconfig-paths/register src/infra/express/server.ts",
+    "dev:server": "ts-node-dev --inspect --respawn --exit-child --watch 'src/**' --transpile-only --ignore-watch node_modules -r tsconfig-paths/register src/infra/express/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "start": "NODE_ENV=production node dist/infra/express/server.js",
     "test": "NODE_ENV=test jest --runInBand --detectOpenHandles",
