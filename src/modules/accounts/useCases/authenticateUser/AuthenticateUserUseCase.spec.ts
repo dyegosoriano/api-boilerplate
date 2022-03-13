@@ -31,9 +31,9 @@ describe('AuthenticateUserUseCase', () => {
     await createUserUseCase.execute(createUserPayload)
     const user = await authenticateUserUseCase.execute(loginUserPayload)
 
-    expect(user).toHaveProperty('refresh_token')
+    expect(user.authentication).toHaveProperty('refresh_token')
+    expect(user.authentication).toHaveProperty('token')
     expect(user).not.toHaveProperty('password')
-    expect(user).toHaveProperty('token')
   })
 
   it('must not be able to authenticate a user with non-existent email or invalid password', async () => {

@@ -41,13 +41,13 @@ class AuthenticateUserUseCase {
 
     const { refresh_token } = await this.refreshTokensRepository.create({ user_id: user.id, expires_date })
 
-    const token = sign({ message: 'teste' }, auth.secret_token, {
+    const token = sign({ }, auth.secret_token, {
       expiresIn: auth.expires_in_token,
       subject: user.id
     })
 
     const response = UserMap.toDTO(user)
-    Object.assign(response, { refresh_token, token })
+    Object.assign(response, { authentication: { refresh_token, token } })
 
     return response
   }
