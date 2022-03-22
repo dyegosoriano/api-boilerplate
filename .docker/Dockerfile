@@ -1,6 +1,6 @@
 # Build version
 FROM node:16-slim as BUILDER
-LABEL maintainer="Dyego Soriano"\
+LABEL maintainer="Dyego Soriano" \
       version="1.0"
 
 RUN mkdir -p /usr/app/node_modules && chown -R node:node /usr/app
@@ -11,10 +11,10 @@ COPY . .
 
 USER node
 
-RUN yarn install \
+RUN yarn install --silent \
     && yarn build \
     && rm -rf node_modules \
-    && yarn install --production
+    && yarn install --silent --production
 
 # Final version
 FROM node:16-alpine as FINAL
