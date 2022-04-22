@@ -17,4 +17,8 @@ app.use(routes)
 app.use(errorHandling.notFound)
 app.use(errorHandling.globalErrors)
 
-export { app }
+const startServer = async (portNumber: number | string) => {
+  app.listen(portNumber, () => console.log(`🚀 Server is running port: ${portNumber}`))
+}
+
+export { startServer, app }
