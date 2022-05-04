@@ -1,2 +1,9 @@
 node_modules
+coverage
+prisma
 dist
+tmp
+
+.docker
+.github
+.git
