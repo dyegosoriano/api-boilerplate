@@ -22,7 +22,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "include": [
-    "./src/**/*"
-  ]
+  "exclude": ["coverage", "dist"],
+  "include": ["./src/**/*"]
 }
