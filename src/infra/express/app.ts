@@ -2,23 +2,43 @@ import 'reflect-metadata'
 import 'express-async-errors'
 import 'dotenv/config'
 
-import express from 'express'
+import express, { Application } from 'express'
 
 import errorHandling from './middlewares/errorHandling'
 import { routes } from './routes'
 
 import '@shared/container'
 
-const app = express()
+export class AppServer {
+  private readonly server: Application
 
-app.use(express.json())
-app.use(routes)
+  constructor () {
+    this.server = express()
 
-app.use(errorHandling.notFound)
-app.use(errorHandling.globalErrors)
+    this.middlewares()
+    this.routes()
+    this.errorsHandler()
+  }
 
-const startServer = async (portNumber: number | string) => {
-  app.listen(portNumber, () => console.log(`🚀 Server is running port: ${portNumber}`))
+  start (port: number, callback?: Function) {
+    return this.server.listen(port, () => {
+      console.info(`🚀 Server is running port: ${port}`)
+      console.info(`Worker started pid: ${process.pid}`)
+
+      if (callback) callback(process.pid)
+    })
+  }
+
+  private errorsHandler () {
+    this.server.use(errorHandling.notFound)
+    this.server.use(errorHandling.globalErrors)
+  }
+
+  private middlewares () {
+    this.server.use(express.json())
+  }
+
+  private routes () {
+    this.server.use(routes)
+  }
 }
-
-export { startServer, app }
