@@ -1,7 +1,7 @@
 import 'dotenv/config'
 
 import { AppServer } from './express/app'
-import { prismaClient } from './prisma/prismaClient'
+import { prisma } from './prisma/client'
 
 const port = Number(process.env.PORT) || 3333
 const app = new AppServer()
@@ -17,7 +17,7 @@ function gracefulShutdown (_code: string) {
       console.info('Http server closed.')
 
       console.info('Closing database connection...')
-      await prismaClient.$disconnect()
+      await prisma.$disconnect()
       console.info('Database connection closed.')
 
       process.exit(1)
