@@ -7,13 +7,13 @@
     "node": ">=16"
   },
   "scripts": {
-    "predev:server": "yarn prisma migrate dev",
-    "dev:server": "ts-node-dev --inspect --respawn --exit-child --watch 'src/**' --transpile-only --ignore-watch node_modules -r tsconfig-paths/register src/infra/server.ts",
+    "dev:server": "ts-node-dev --inspect=0.0.0.0 --respawn --exit-child --watch 'src/**' --transpile-only --ignore-watch node_modules -r tsconfig-paths/register src/infra/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "prestart": "yarn prisma migrate dev",
-    "start": "NODE_ENV=production node dist/infra/server.js",
+    "start": "NODE_ENV=production node --inspect=0.0.0.0 dist/infra/server.js",
     "test": "NODE_ENV=test jest --runInBand --detectOpenHandles",
     "test:watch": "NODE_ENV=test jest --watch --maxWorkers=50%",
+    "db:migrate": "yarn prisma migrate dev",
     "prepare": "husky install",
     "commit": "cz"
   },
