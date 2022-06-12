@@ -26,7 +26,7 @@ export default {
       })
     }
 
-    console.log(`error.message >>> ${err.message} <<<`)
+    console.log(err.stack)
 
     res.status(500).json({ status: 'error', message: 'Internal server error' })
   }
