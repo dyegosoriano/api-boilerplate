@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { pathsToModuleNameMapper } from 'ts-jest/utils'
+import { pathsToModuleNameMapper } from 'ts-jest'
 
 import { compilerOptions } from './tsconfig.json'
 
@@ -170,7 +170,6 @@ export default {
   // timers: "real",
 
   // A map from regular expressions to paths to transformers
-  // transform: undefined,
   transform: {
     '^.+\\.(t|j)sx?$': [
       '@swc/jest',
