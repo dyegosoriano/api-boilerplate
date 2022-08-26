@@ -1,0 +1,1 @@
+export { paginateArray } from './paginateArray'
