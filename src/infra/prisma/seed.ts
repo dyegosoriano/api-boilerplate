@@ -1,8 +1,9 @@
 import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
 
-import { BcryptHashProvider } from '../src/shared/container/providers/HashProvider/implementations/BcryptHashProvider'
-import { User } from '../src/modules/accounts/entities/Users'
+import { BcryptHashProvider } from '@shared/container/providers/HashProvider/implementations/BcryptHashProvider'
+import { User } from '@modules/accounts/entities/Users'
+
+const prisma = new PrismaClient()
 
 async function main() {
   try {

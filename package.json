@@ -14,7 +14,7 @@
     "test": "NODE_ENV=test jest --runInBand --detectOpenHandles",
     "test:watch": "NODE_ENV=test jest --watch --maxWorkers=50%",
     "db:migrate": "yarn prisma migrate dev",
-    "db:seed": "ts-node-dev prisma/seed.ts",
+    "db:seed": "ts-node-dev -r tsconfig-paths/register src/infra/prisma/seed.ts",
     "db:pull": "yarn prisma db pull",
     "prepare": "husky install",
     "commit": "cz"
