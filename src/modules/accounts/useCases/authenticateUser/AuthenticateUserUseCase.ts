@@ -1,4 +1,3 @@
-
 import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
 
@@ -41,7 +40,7 @@ class AuthenticateUserUseCase {
 
     const { refresh_token } = await this.refreshTokensRepository.create({ user_id: user.id, expires_date })
 
-    const token = sign({ }, auth.secret_token, {
+    const token = sign({ roles: user.roles }, auth.secret_token, {
       expiresIn: auth.expires_in_token,
       subject: user.id
     })

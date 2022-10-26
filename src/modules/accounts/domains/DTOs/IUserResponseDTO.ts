@@ -1,7 +1,10 @@
+import { IRole } from '../models/IUser'
+
 interface IUserResponseDTO {
   id: string
   name: string
   email: string
+  roles: IRole[]
 
   authentication?: {
     refresh_token: string

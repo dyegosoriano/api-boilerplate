@@ -12,7 +12,7 @@ async function main() {
 
     const password = await bcryptHashProvider.generateHash('Test123456')
 
-    Object.assign(userAdmin, { password, email: 'admin@email.com', name: 'Admin' })
+    Object.assign(userAdmin, { password, email: 'admin@email.com', name: 'Admin', roles: ['ADMIN'] })
 
     const admin = await prisma.users.upsert({
       where: { email: userAdmin.email },

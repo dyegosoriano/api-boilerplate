@@ -14,6 +14,7 @@ model Users {
   password      String
   updated_at    DateTime
   created_at    DateTime
+  roles         Role[]         @default([USER])
   refresh_token RefreshTokens?
 
   @@map("users")
@@ -29,4 +30,9 @@ model RefreshTokens {
   user          Users    @relation(fields: [user_id], references: [id])
 
   @@map("refresh_tokens")
+}
+
+enum Role {
+  ADMIN
+  USER
 }

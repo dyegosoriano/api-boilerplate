@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import { ensureAuthenticate } from '@infra/express/middlewares/ensureAuthenticate'
+import { permissions } from '@infra/express/middlewares/permissions'
 import { CreateUserController } from '@modules/accounts/useCases/createUser/CreateUserController'
 import { GetUserController } from '@modules/accounts/useCases/getUser/GetUserController'
 import { ListUsersController } from '@modules/accounts/useCases/listUsersUseCase/ListUsersController'
@@ -13,8 +14,9 @@ const usersRoutes = Router()
 
 usersRoutes
   .use(ensureAuthenticate)
+  .use(permissions(['USER', 'ADMIN']))
   .post('/', createUserController.handle)
-  .get('/', listUsersController.handle)
   .get('/:id', getUserController.handle)
+  .get('/', listUsersController.handle)
 
 export { usersRoutes }

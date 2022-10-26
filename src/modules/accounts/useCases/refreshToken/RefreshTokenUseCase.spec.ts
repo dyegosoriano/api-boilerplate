@@ -1,4 +1,5 @@
 import { RefreshTokensRepositoryInMemory } from '@modules/accounts/infra/fakes/repositories/RefreshTokensRepositoryInMemory'
+import { UsersRepositoryInMemory } from '@modules/accounts/infra/fakes/repositories/UsersRepositoryInMemory'
 import { DayjsDateProvider } from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
 import { AppError } from '@shared/errors/AppError'
 
@@ -7,9 +8,14 @@ import { RefreshTokenUseCase } from './RefreshTokenUseCase'
 describe('RefreshTokenUseCase', () => {
   const makeRefreshToken = () => {
     const refreshTokensRepositoryInMemory = new RefreshTokensRepositoryInMemory()
+    const usersRepositoryInMemory = new UsersRepositoryInMemory()
     const dateProvider = new DayjsDateProvider()
 
-    const refreshTokenUseCase = new RefreshTokenUseCase(refreshTokensRepositoryInMemory, dateProvider)
+    const refreshTokenUseCase = new RefreshTokenUseCase(
+      refreshTokensRepositoryInMemory,
+      usersRepositoryInMemory,
+      dateProvider
+    )
 
     return { refreshTokensRepositoryInMemory, refreshTokenUseCase, dateProvider }
   }
@@ -26,7 +32,8 @@ describe('RefreshTokenUseCase', () => {
   it('should not be able to refresh a token with invalid refresh token', async () => {
     const { refreshTokenUseCase } = makeRefreshToken()
 
-    await expect(refreshTokenUseCase.execute({ refresh_token: 'invalid_refresh_token' }))
-      .rejects.toEqual(new AppError('Refresh token does not exist'))
+    await expect(refreshTokenUseCase.execute({ refresh_token: 'invalid_refresh_token' })).rejects.toEqual(
+      new AppError('Refresh token does not exist')
+    )
   })
 })
