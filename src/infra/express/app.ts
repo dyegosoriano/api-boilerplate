@@ -4,6 +4,7 @@ import 'dotenv/config'
 
 import express, { Application } from 'express'
 
+import { ensureSSL } from './middlewares/ensureSSL'
 import errorHandling from './middlewares/errorHandling'
 import { routes } from './routes'
 
@@ -35,6 +36,7 @@ export class AppServer {
   }
 
   private middlewares () {
+    if (process.env.NODE_ENV === 'production') this.server.use(ensureSSL)
     this.server.use(express.json())
   }
 
