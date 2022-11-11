@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 
+import { IUseCase } from '@core/infra/IUseCase'
 import { ICreateUserDTO } from '@modules/accounts/domains/DTOs/ICreateUserDTO'
 import { IUserResponseDTO } from '@modules/accounts/domains/DTOs/IUserResponseDTO'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
@@ -9,13 +10,13 @@ import { IHashProvider } from '@shared/container/providers/HashProvider/models/I
 import { AppError } from '@shared/errors/AppError'
 
 @injectable()
-class CreateUserUseCase {
+class CreateUserUseCase implements IUseCase<IUserResponseDTO> {
   constructor (
     @inject('UsersRepository') private readonly usersRepository: IUsersRepository,
     @inject('HashProvider') private readonly hashProvider: IHashProvider
   ) {}
 
-  async execute ({ password, email, name }: ICreateUserDTO): Promise<IUserResponseDTO> {
+  async execute ({ password, email, name }: ICreateUserDTO) {
     await validationCreateUser.validate({ password, email, name })
 
     const userAlreadyExists = await this.usersRepository.findByEmail(email)

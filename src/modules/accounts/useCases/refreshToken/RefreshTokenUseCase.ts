@@ -2,6 +2,7 @@ import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
 
 import auth from '@core/config/auth'
+import { IUseCase } from '@core/infra/IUseCase'
 import { IRefreshTokensRepository } from '@modules/accounts/domains/repositories/IRefreshTokensRepository'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
 import { IDateProvider } from '@shared/container/providers/DateProvider/models/IDateProvider'
@@ -16,14 +17,14 @@ interface IResponse {
 }
 
 @injectable()
-class RefreshTokenUseCase {
+class RefreshTokenUseCase implements IUseCase<IResponse> {
   constructor (
     @inject('RefreshTokensRepository') private readonly refreshTokensRepository: IRefreshTokensRepository,
     @inject('UsersRepository') private readonly usersRepository: IUsersRepository,
     @inject('DateProvider') private readonly dateProvider: IDateProvider
   ) {}
 
-  async execute ({ refresh_token }: IRequest): Promise<IResponse> {
+  async execute ({ refresh_token }: IRequest) {
     if (!refresh_token) throw new AppError('Refresh token is required')
 
     const refreshTokenAlreadyExists = await this.refreshTokensRepository.findByRefreshToken({ refresh_token })

@@ -2,6 +2,7 @@ import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
 
 import auth from '@core/config/auth'
+import { IUseCase } from '@core/infra/IUseCase'
 import { IUserResponseDTO } from '@modules/accounts/domains/DTOs/IUserResponseDTO'
 import { IRefreshTokensRepository } from '@modules/accounts/domains/repositories/IRefreshTokensRepository'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
@@ -17,7 +18,7 @@ interface IRequest {
 }
 
 @injectable()
-class AuthenticateUserUseCase {
+class AuthenticateUserUseCase implements IUseCase<IUserResponseDTO> {
   constructor (
     @inject('RefreshTokensRepository') private readonly refreshTokensRepository: IRefreshTokensRepository,
     @inject('UsersRepository') private readonly usersRepository: IUsersRepository,
@@ -25,7 +26,7 @@ class AuthenticateUserUseCase {
     @inject('DateProvider') private readonly dateProvider: IDateProvider
   ) {}
 
-  async execute ({ password, email }: IRequest): Promise<IUserResponseDTO> {
+  async execute ({ password, email }: IRequest) {
     await validationAuthenticateUser.validate({ password, email })
 
     const user = await this.usersRepository.findByEmail(email)
