@@ -10,10 +10,15 @@ import { UserMap } from '@modules/accounts/mappers/UserMap'
 class ListUsersUseCase implements IUseCase<IUserResponseDTO[]> {
   constructor (@inject('UsersRepository') private readonly usersRepository: IUsersRepository) {}
 
-  async execute ({ page_size, page, email, name }: IFindAllUsersDTO) {
-    const users = await this.usersRepository.findAll({ page_size, page, email, name })
+  async execute ({ page_size = 10, page = 1, email, name }: IFindAllUsersDTO) {
+    const { total_users, users } = await this.usersRepository.findAll({ page_size, page, email, name })
 
-    return users.map(user => UserMap.toDTO(user))
+    return {
+      total_pages: Math.floor(total_users / page_size),
+      page_size: +page_size,
+      page: +page,
+      users: users.map(user => UserMap.toDTO(user))
+    }
   }
 }
 

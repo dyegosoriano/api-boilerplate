@@ -4,7 +4,7 @@ import { ensureAuthenticate } from '@infra/express/middlewares/ensureAuthenticat
 import { permissions } from '@infra/express/middlewares/permissions'
 import { CreateUserController } from '@modules/accounts/useCases/createUser/CreateUserController'
 import { GetUserController } from '@modules/accounts/useCases/getUser/GetUserController'
-import { ListUsersController } from '@modules/accounts/useCases/listUsersUseCase/ListUsersController'
+import { ListUsersController } from '@modules/accounts/useCases/listUsers/ListUsersController'
 
 const createUserController = new CreateUserController()
 const listUsersController = new ListUsersController()
