@@ -25,7 +25,7 @@ class UsersRepositoryInMemory implements IUsersRepository {
     return this.repository.find(user => user.id === id) as IUser
   }
 
-  async findAll ({ page_size = 10, page = 1, email, name }: IFindAllUsersDTO):Promise<IFindAllUsersResultDTO> {
+  async findAll ({ page_size = 10, page = 1, email, name }: IFindAllUsersDTO): Promise<IFindAllUsersResultDTO> {
     let repoClone = this.repository
 
     if (email) repoClone = repoClone.filter(item => item.email.toUpperCase().includes(email.toUpperCase()))

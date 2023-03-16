@@ -1,6 +1,6 @@
 import { ValidationError } from 'yup'
 
-import { UsersRepositoryInMemory } from '@modules/accounts/infra/fakes/repositories/UsersRepositoryInMemory'
+import { UsersRepositoryInMemory } from '@modules/accounts/infra/fakes/UsersRepositoryInMemory'
 import { BcryptHashProvider } from '@shared/container/providers/HashProvider/implementations/BcryptHashProvider'
 import { AppError } from '@shared/errors/AppError'
 
@@ -34,37 +34,41 @@ describe('CreateUserUseCase', () => {
     const { createUserUseCase } = makeCreateUser()
     await createUserUseCase.execute(userPayload)
 
-    await expect(createUserUseCase.execute(userPayload))
-      .rejects.toEqual(new AppError('User already exists'))
+    await expect(createUserUseCase.execute(userPayload)).rejects.toEqual(new AppError('User already exists'))
   })
 
   it('should not be able to create a new user with an invalid email', async () => {
     const { createUserUseCase } = makeCreateUser()
     const { password, name } = userPayload
 
-    await expect(createUserUseCase.execute({ password, name, email: 'invalid.email.com' }))
-      .rejects.toEqual(new ValidationError('Provide a valid email'))
+    await expect(createUserUseCase.execute({ password, name, email: 'invalid.email.com' })).rejects.toEqual(
+      new ValidationError('Provide a valid email')
+    )
   })
 
   it('should not be possible to register a user without a name', async () => {
     const { createUserUseCase } = makeCreateUser()
     const { password, email } = userPayload
 
-    await expect(createUserUseCase.execute({ password, email, name: '' }))
-      .rejects.toEqual(new ValidationError('Name must be at least 3 characters'))
+    await expect(createUserUseCase.execute({ password, email, name: '' })).rejects.toEqual(
+      new ValidationError('Name must be at least 3 characters')
+    )
   })
 
   it('should not be possible to register a new user with an invalid password', async () => {
     const { createUserUseCase } = makeCreateUser()
     const { name, email } = userPayload
 
-    await expect(createUserUseCase.execute({ password: '12345678', name, email }))
-      .rejects.toEqual(new ValidationError('Password must contain at least one number or letter'))
+    await expect(createUserUseCase.execute({ password: '12345678', name, email })).rejects.toEqual(
+      new ValidationError('Password must contain at least one number or letter')
+    )
 
-    await expect(createUserUseCase.execute({ password: 'Test1234567890123', name, email }))
-      .rejects.toEqual(new ValidationError('Password must be at most 16 characters'))
+    await expect(createUserUseCase.execute({ password: 'Test1234567890123', name, email })).rejects.toEqual(
+      new ValidationError('Password must be at most 16 characters')
+    )
 
-    await expect(createUserUseCase.execute({ password: 'Test123', name, email }))
-      .rejects.toEqual(new ValidationError('Password must be at least 8 characters'))
+    await expect(createUserUseCase.execute({ password: 'Test123', name, email })).rejects.toEqual(
+      new ValidationError('Password must be at least 8 characters')
+    )
   })
 })

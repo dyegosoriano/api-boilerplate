@@ -17,7 +17,9 @@ class RefreshTokensRepositoryInMemory implements IRefreshTokensRepository {
 
   async findByRefreshToken ({ refresh_token, user_id }: IFindByRefreshTokensDTO): Promise<RefreshTokens> {
     if (refresh_token && user_id) {
-      return this.repository.find(refresh => refresh.refresh_token === refresh_token && refresh.user_id === user_id) as RefreshTokens
+      return this.repository.find(
+        refresh => refresh.refresh_token === refresh_token && refresh.user_id === user_id
+      ) as RefreshTokens
     }
 
     return this.repository.find(refresh => refresh.refresh_token === refresh_token) as RefreshTokens

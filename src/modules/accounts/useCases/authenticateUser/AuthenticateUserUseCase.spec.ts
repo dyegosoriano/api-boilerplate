@@ -1,7 +1,7 @@
 import { ValidationError } from 'yup'
 
-import { RefreshTokensRepositoryInMemory } from '@modules/accounts/infra/fakes/repositories/RefreshTokensRepositoryInMemory'
-import { UsersRepositoryInMemory } from '@modules/accounts/infra/fakes/repositories/UsersRepositoryInMemory'
+import { RefreshTokensRepositoryInMemory } from '@modules/accounts/infra/fakes/RefreshTokensRepositoryInMemory'
+import { UsersRepositoryInMemory } from '@modules/accounts/infra/fakes/UsersRepositoryInMemory'
 import { DayjsDateProvider } from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
 import { BcryptHashProvider } from '@shared/container/providers/HashProvider/implementations/BcryptHashProvider'
 import { AppError } from '@shared/errors/AppError'
