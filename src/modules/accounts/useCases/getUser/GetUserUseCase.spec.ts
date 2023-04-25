@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { describe, expect, it } from 'vitest'
+
 import { UsersRepositoryInMemory } from '@modules/accounts/infra/fakes/UsersRepositoryInMemory'
 import { BcryptHashProvider } from '@shared/container/providers/HashProvider/implementations/BcryptHashProvider'
 import { AppError } from '@shared/errors/AppError'

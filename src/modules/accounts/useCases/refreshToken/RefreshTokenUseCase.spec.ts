@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { describe, expect, it } from 'vitest'
+
 import { RefreshTokensRepositoryInMemory } from '@modules/accounts/infra/fakes/RefreshTokensRepositoryInMemory'
 import { UsersRepositoryInMemory } from '@modules/accounts/infra/fakes/UsersRepositoryInMemory'
 import { DayjsDateProvider } from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
