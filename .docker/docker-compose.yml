@@ -4,6 +4,7 @@ services:
   api:
     container_name: boilerplate-api
     command: yarn dev:server
+    restart: unless-stopped
     build: .
     ports:
       - ${PORT}:${PORT}
@@ -18,10 +19,12 @@ services:
       - .env
     depends_on:
       - database
+      # - proxy
 
   database:
     container_name: boilerplate-database
     image: postgres:14.1-alpine
+    restart: unless-stopped
     ports:
       - ${DB_PORT}:5432
     environment:
@@ -32,6 +35,20 @@ services:
       - boilerplate-volume:/data/postgres
     env_file:
       - .env
+    networks:
+      - boilerplate-network
+
+  proxy:
+    container_name: boilerplate-proxy
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '443:443'
+      - '80:80'
+      - '81:81'
+    volumes:
+      - ./.docker/nginx/letsencrypt:/etc/letsencrypt
+      - ./.docker/nginx/data:/data
     networks:
       - boilerplate-network
 

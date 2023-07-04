@@ -12,6 +12,7 @@ COPY . .
 USER node
 
 RUN yarn install --silent \
+    && yarn db:generate \
     && yarn build \
     && rm -rf node_modules \
     && yarn install --silent --production
