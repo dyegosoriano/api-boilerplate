@@ -41,7 +41,7 @@
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.8.0",
     "uuid": "^9.0.0",
-    "yup": "^0.32.11"
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.4",

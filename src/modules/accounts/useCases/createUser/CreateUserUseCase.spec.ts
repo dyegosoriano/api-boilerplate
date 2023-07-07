@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { describe, expect, it } from 'vitest'
-import { ValidationError } from 'yup'
+import { ZodError } from 'zod'
 
 import { UsersRepositoryInMemory } from '@modules/accounts/infra/fakes/UsersRepositoryInMemory'
 import { BcryptHashProvider } from '@shared/container/providers/HashProvider/implementations/BcryptHashProvider'
@@ -43,34 +43,22 @@ describe('CreateUserUseCase', () => {
     const { createUserUseCase } = makeCreateUser()
     const { password, name } = userPayload
 
-    await expect(createUserUseCase.execute({ password, name, email: 'invalid.email.com' })).rejects.toEqual(
-      new ValidationError('Provide a valid email')
-    )
+    await expect(createUserUseCase.execute({ password, name, email: 'invalid.email.com' })).rejects.toThrow(ZodError)
   })
 
   it('should not be possible to register a user without a name', async () => {
     const { createUserUseCase } = makeCreateUser()
     const { password, email } = userPayload
 
-    await expect(createUserUseCase.execute({ password, email, name: '' })).rejects.toEqual(
-      new ValidationError('Name must be at least 3 characters')
-    )
+    await expect(createUserUseCase.execute({ password, email, name: '' })).rejects.toThrow(ZodError)
   })
 
   it('should not be possible to register a new user with an invalid password', async () => {
     const { createUserUseCase } = makeCreateUser()
     const { name, email } = userPayload
 
-    await expect(createUserUseCase.execute({ password: '12345678', name, email })).rejects.toEqual(
-      new ValidationError('Password must contain at least one number or letter')
-    )
-
-    await expect(createUserUseCase.execute({ password: 'Test1234567890123', name, email })).rejects.toEqual(
-      new ValidationError('Password must be at most 16 characters')
-    )
-
-    await expect(createUserUseCase.execute({ password: 'Test123', name, email })).rejects.toEqual(
-      new ValidationError('Password must be at least 8 characters')
-    )
+    await expect(createUserUseCase.execute({ password: 'Test1234567890123', name, email })).rejects.toThrow(ZodError)
+    await expect(createUserUseCase.execute({ password: '12345678', name, email })).rejects.toThrow(ZodError)
+    await expect(createUserUseCase.execute({ password: 'Test123', name, email })).rejects.toThrow(ZodError)
   })
 })

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { ValidationError } from 'yup'
+import { z } from 'zod'
 
 import { AppError } from '@shared/errors/AppError'
 
@@ -16,12 +16,12 @@ export default {
       })
     }
 
-    if (err instanceof ValidationError) {
+    if (err instanceof z.ZodError) {
       return res.status(400).json({
         status: 'error',
         message: {
-          errors: err.message,
-          path: err.path
+          errors: err.issues.map((issue) => issue.message),
+          path: err?.errors.map((error) => error.path[0])
         }
       })
     }

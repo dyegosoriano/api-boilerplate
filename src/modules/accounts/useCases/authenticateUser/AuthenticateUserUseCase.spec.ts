@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { describe, expect, it } from 'vitest'
-import { ValidationError } from 'yup'
+import { ZodError } from 'zod'
 
 import { RefreshTokensRepositoryInMemory } from '@modules/accounts/infra/fakes/RefreshTokensRepositoryInMemory'
 import { UsersRepositoryInMemory } from '@modules/accounts/infra/fakes/UsersRepositoryInMemory'
@@ -48,16 +48,14 @@ describe('AuthenticateUserUseCase', () => {
 
     await createUserUseCase.execute(createUserPayload)
 
+    await expect(authenticateUserUseCase.execute({ ...loginUserPayload, password: 'invalidPass' })).rejects.toThrow(ZodError)
+
     await expect(authenticateUserUseCase.execute({ ...loginUserPayload, email: 'invalid@email.com' })).rejects.toEqual(
       new AppError('User or password does not match')
     )
 
     await expect(authenticateUserUseCase.execute({ ...loginUserPayload, password: 'invalidPass123' })).rejects.toEqual(
       new AppError('User or password does not match')
-    )
-
-    await expect(authenticateUserUseCase.execute({ ...loginUserPayload, password: 'invalidPass' })).rejects.toEqual(
-      new ValidationError('Password must contain at least one number or letter')
     )
   })
 })

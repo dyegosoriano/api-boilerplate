@@ -1,7 +1,5 @@
-interface ICreateUserDTO {
-  password: string
-  email: string
-  name: string
-}
+import { z } from 'zod'
 
-export { ICreateUserDTO }
+import { validationCreateUser } from '@modules/accounts/validations/validationCreateUser'
+
+export type ICreateUserDTO = z.infer<typeof validationCreateUser>

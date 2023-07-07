@@ -1,5 +1,6 @@
 import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
+import { z } from 'zod'
 
 import auth from '@core/config/auth'
 import { IUseCase } from '@core/infra/IUseCase'
@@ -12,10 +13,7 @@ import { IDateProvider } from '@shared/container/providers/DateProvider/models/I
 import { IHashProvider } from '@shared/container/providers/HashProvider/models/IHashProvider'
 import { AppError } from '@shared/errors/AppError'
 
-interface IRequest {
-  password: string
-  email: string
-}
+type IRequest = z.infer<typeof validationAuthenticateUser>
 
 @injectable()
 class AuthenticateUserUseCase implements IUseCase<IUserResponseDTO> {
@@ -26,13 +24,13 @@ class AuthenticateUserUseCase implements IUseCase<IUserResponseDTO> {
     @inject('DateProvider') private readonly dateProvider: IDateProvider
   ) {}
 
-  async execute ({ password, email }: IRequest) {
-    await validationAuthenticateUser.validate({ password, email })
+  async execute (data: IRequest) {
+    const valid_data = validationAuthenticateUser.parse(data)
 
-    const user = await this.usersRepository.findByEmail(email)
+    const user = await this.usersRepository.findByEmail(valid_data.email)
     if (!user) throw new AppError('User or password does not match')
 
-    const passwordMatched = await this.hashProvider.compareHash(password, user.password)
+    const passwordMatched = await this.hashProvider.compareHash(valid_data.password, user.password)
     if (!passwordMatched) throw new AppError('User or password does not match')
 
     await this.refreshTokensRepository.deleteAllByUserId(user.id)

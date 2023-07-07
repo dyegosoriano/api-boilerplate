@@ -16,15 +16,15 @@ class CreateUserUseCase implements IUseCase<IUserResponseDTO> {
     @inject('HashProvider') private readonly hashProvider: IHashProvider
   ) {}
 
-  async execute ({ password, email, name }: ICreateUserDTO) {
-    await validationCreateUser.validate({ password, email, name })
+  async execute (data: ICreateUserDTO) {
+    const valid_data = validationCreateUser.parse(data)
 
-    const userAlreadyExists = await this.usersRepository.findByEmail(email)
+    const userAlreadyExists = await this.usersRepository.findByEmail(valid_data.email)
     if (userAlreadyExists) throw new AppError('User already exists')
 
-    const hashedPassword = await this.hashProvider.generateHash(password)
+    const hashedPassword = await this.hashProvider.generateHash(valid_data.password)
 
-    const user = await this.usersRepository.create({ password: hashedPassword, email, name })
+    const user = await this.usersRepository.create({ ...valid_data, password: hashedPassword })
 
     return UserMap.toDTO(user)
   }
