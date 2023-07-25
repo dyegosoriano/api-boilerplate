@@ -20,7 +20,7 @@ async function main() {
       update: {}
     })
 
-    console.log({ admin })
+    console.log({ ...admin, password })
 
     await prisma.$disconnect()
   } catch (error) {

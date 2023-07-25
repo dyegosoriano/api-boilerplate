@@ -1,5 +1,5 @@
 # Build version
-FROM node:16-slim as BUILDER
+FROM node:18-slim as BUILDER
 LABEL maintainer="Dyego Soriano" \
       version="1.0"
 
@@ -18,7 +18,7 @@ RUN yarn install --silent \
     && yarn install --silent --production
 
 # Final version
-FROM node:16-alpine as FINAL
+FROM node:18-alpine as FINAL
 
 WORKDIR /usr/app
 
