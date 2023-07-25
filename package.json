@@ -10,7 +10,7 @@
     "dev:server": "tsx watch --ignore ./node_modules src/infra/server.ts",
     "build": "tsup src",
     "prestart": "yarn prisma migrate deploy",
-    "start": "NODE_ENV=production node --inspect=0.0.0.0 dist/infra/server.js",
+    "start": "NODE_ENV=production node --inspect=0.0.0.0 dist/infra/cluster.js",
     "test:coverage": "NODE_ENV=test vitest run --coverage",
     "test:watch": "NODE_ENV=test vitest",
     "db:deploy": "yarn prisma migrate deploy",
