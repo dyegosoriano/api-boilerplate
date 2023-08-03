@@ -7,7 +7,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "dev:server": "tsx watch --ignore ./node_modules src/infra/server.ts",
+    "dev:server": "tsx watch --ignore ./node_modules src/infra/cluster.ts",
     "build": "tsup src",
     "prestart": "yarn prisma migrate deploy",
     "start": "NODE_ENV=production node --inspect=0.0.0.0 dist/infra/cluster.js",

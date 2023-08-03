@@ -21,9 +21,6 @@ const runPrimaryProcess = () => {
 
 const runWorkerProcess = async () => {
   await import('./server')
-
-  // const { default: server } = (await import('./server')) as any
-  // server()
 }
 
 const isProduction = process.env.NODE_ENV === 'production'
