@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'
 
-import auth from '@core/config/auth'
+import config from '@core/config'
 import { IRole } from '@modules/accounts/domains/models/IUser'
 import { AppError } from '@shared/errors/AppError'
 
@@ -18,7 +18,7 @@ export async function ensureAuthenticate (request: Request, _response: Response,
   const [, token] = authHeader.split(' ')
 
   try {
-    const { sub: user_id, roles } = <IPayload>verify(token, auth.secret_token)
+    const { sub: user_id, roles } = <IPayload>verify(token, config.auth.secret_token)
 
     request.user = { id: user_id, roles }
 
