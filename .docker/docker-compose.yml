@@ -11,6 +11,7 @@ services:
       - 9229:9229
     environment:
       - DATABASE_URL=postgres://${DB_USERNAME}:${DB_PASSWORD}@database:5432/${DB_NAME}?connect_timeout=300
+      - REDIS_URL=boilerplate-redis
     volumes:
       - .:/usr/app
     networks:
@@ -19,11 +20,12 @@ services:
       - .env
     depends_on:
       - database
+      - redis
       # - proxy
 
   database:
     container_name: boilerplate-database
-    image: postgres:14.1-alpine
+    image: postgres:15.3-alpine
     restart: unless-stopped
     ports:
       - ${DB_PORT}:5432
@@ -35,6 +37,16 @@ services:
       - boilerplate-volume:/data/postgres
     env_file:
       - .env
+    networks:
+      - boilerplate-network
+
+  redis:
+    container_name: boilerplate-redis
+    image: redis:7-alpine
+    ports:
+      - 6379:6379
+    volumes:
+      - boilerplate-volume:/data/redis
     networks:
       - boilerplate-network
 
