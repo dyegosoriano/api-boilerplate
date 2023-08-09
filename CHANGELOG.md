@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/dyegosoriano/api-boilerplate/compare/v1.3.0...v1.4.0) (2023-08-09)
+
+
+### Features
+
+* **src/infra/queue,src/infra/redis:** creation of classes that deal with queues and caching ([2d4e88d](https://github.com/dyegosoriano/api-boilerplate/commit/2d4e88d753472b9869bd47e3f5bc981eb6936b18))
+
+
+### Bug Fixes
+
+* **src/infra/cluster.ts:** cluster mode fix ([4eb666b](https://github.com/dyegosoriano/api-boilerplate/commit/4eb666ba248cceda5b90b8230a9125e1edd5c3d5))
+
 ## [1.3.0](https://github.com/dyegosoriano/api-boilerplate/compare/v1.2.1...v1.3.0) (2023-07-25)
 
 
