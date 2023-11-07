@@ -1,11 +1,11 @@
-import JobQueue, { Job } from 'bull'
+import JobQueue from 'bull'
 
 import config from '@core/config'
-import { IQueue } from '@core/infra/queue'
+import { IQueue, IQueueClient } from '@core/infra/queue'
 
 import * as jobs from './jobs'
 
-class QueueClient {
+class QueueClient implements IQueueClient {
   private queues: IQueue[]
 
   constructor () {
@@ -14,7 +14,13 @@ class QueueClient {
 
   private init () {
     const queues = Object.values(jobs).map(job => ({
-      bull: new JobQueue(job.key, { redis: config.redis.url }),
+      bull: new JobQueue(job.key, {
+        redis: {
+          password: config.redis.password,
+          host: config.redis.host,
+          port: config.redis.port
+        }
+      }),
       options: job.options,
       handle: job.handle,
       name: job.key
@@ -34,7 +40,9 @@ class QueueClient {
     return this.queues.forEach(queue => {
       queue.bull.process(queue.handle)
 
-      queue.bull.on('failed', (job: Job, err: Error) => {
+      queue.bull.on('error', (error: Error) => console.log('QueueClient ERROR:', error))
+
+      queue.bull.on('failed', (job: JobQueue.Job, err: Error) => {
         console.log(`Job ${queue.name} failed: `, job.data)
         console.log(err)
       })

@@ -1,5 +1,10 @@
 import JobQueue from 'bull'
 
+export interface IQueueClient {
+  add(name: string, data: object): void
+  process(): void
+}
+
 export interface IQueue {
   bull: JobQueue.Queue<any>
   options: {

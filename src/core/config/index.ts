@@ -5,5 +5,10 @@ export default {
     expires_refresh_token_days: 30,
     expires_in_token: '15m'
   },
-  redis: { url: process.env.REDIS_URL! }
+  redis: {
+    password: process.env.REDIS_PASSWORD!,
+    port: +process.env.REDIS_PORT!,
+    host: process.env.REDIS_HOST!,
+    url: process.env.REDIS_URL!
+  }
 }
