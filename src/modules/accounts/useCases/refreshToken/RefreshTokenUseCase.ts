@@ -1,7 +1,7 @@
 import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
 
-import config from '@core/config'
+import { config_auth } from '@core/config/auth'
 import { IUseCase } from '@core/infra/IUseCase'
 import { IRefreshTokensRepository } from '@modules/accounts/domains/repositories/IRefreshTokensRepository'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
@@ -39,8 +39,8 @@ export class RefreshTokenUseCase implements IUseCase<IResponse> {
     const tokenExpired = this.dateProvider.compareIfAfter(dateNow, expires_date)
     if (tokenExpired) throw new AppError('Refresh token expired')
 
-    const token = sign({ roles: user?.roles }, config.auth.secret_token, {
-      expiresIn: config.auth.expires_in_token,
+    const token = sign({ roles: user?.roles }, config_auth.auth.secret_token, {
+      expiresIn: config_auth.auth.expires_in_token,
       subject: user_id
     })
 

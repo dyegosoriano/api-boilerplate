@@ -1,6 +1,6 @@
 import JobQueue from 'bull'
 
-import config from '@core/config'
+import { config_redis } from '@core/config/redis'
 import { IQueue, IQueueClient } from '@core/infra/IQueue'
 
 import * as jobs from './jobs'
@@ -16,9 +16,9 @@ class QueueClient implements IQueueClient {
     const queues = Object.values(jobs).map(job => ({
       bull: new JobQueue(job.key, {
         redis: {
-          password: config.redis.password,
-          host: config.redis.host,
-          port: config.redis.port
+          password: config_redis.redis.password,
+          host: config_redis.redis.host,
+          port: config_redis.redis.port
         }
       }),
       options: job.options,

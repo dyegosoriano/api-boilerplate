@@ -2,7 +2,7 @@ import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
 import { z } from 'zod'
 
-import config from '@core/config'
+import { config_auth } from '@core/config/auth'
 import { IUseCase } from '@core/infra/IUseCase'
 import { IUserResponseDTO } from '@modules/accounts/domains/DTOs/IUserResponseDTO'
 import { IRefreshTokensRepository } from '@modules/accounts/domains/repositories/IRefreshTokensRepository'
@@ -35,12 +35,12 @@ export class AuthenticateUserUseCase implements IUseCase<IUserResponseDTO> {
 
     await this.refreshTokensRepository.deleteAllByUserId(user.id)
 
-    const expires_date = this.dateProvider.addDays(config.auth.expires_refresh_token_days)
+    const expires_date = this.dateProvider.addDays(config_auth.auth.expires_refresh_token_days)
 
     const { refresh_token } = await this.refreshTokensRepository.create({ user_id: user.id, expires_date })
 
-    const token = sign({ roles: user.roles }, config.auth.secret_token, {
-      expiresIn: config.auth.expires_in_token,
+    const token = sign({ roles: user.roles }, config_auth.auth.secret_token, {
+      expiresIn: config_auth.auth.expires_in_token,
       subject: user.id
     })
 

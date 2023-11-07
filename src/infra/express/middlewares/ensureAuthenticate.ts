@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'
 
-import config from '@core/config'
+import { config_auth } from '@core/config/auth'
 import { IRole } from '@modules/accounts/domains/models/IUser'
 import { AppError } from '@shared/errors/AppError'
 
@@ -18,7 +18,8 @@ export async function ensureAuthenticate (request: Request, _response: Response,
   const [, token] = authHeader.split(' ')
 
   try {
-    const { sub: user_id, roles } = <IPayload>verify(token, config.auth.secret_token)
+    // TODO: implementar validação de usuário com buscas no banco de dados e cache
+    const { sub: user_id, roles } = <IPayload>verify(token, config_auth.auth.secret_token)
 
     request.user = { id: user_id, roles }
 
