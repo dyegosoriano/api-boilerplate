@@ -1,8 +1,8 @@
 import { v4 as uuid } from 'uuid'
 
-import { IRefreshTokens } from '../domains/models/IRefreshTokens'
+import { IRefreshToken } from '../domains/models/IRefreshToken'
 
-class RefreshTokens implements IRefreshTokens {
+export class RefreshTokens implements IRefreshToken {
   id: string
 
   user_id: string
@@ -21,5 +21,3 @@ class RefreshTokens implements IRefreshTokens {
     }
   }
 }
-
-export { RefreshTokens }

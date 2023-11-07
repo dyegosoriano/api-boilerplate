@@ -7,7 +7,7 @@ import { UserMap } from '@modules/accounts/mappers/UserMap'
 import { AppError } from '@shared/errors/AppError'
 
 @injectable()
-class GetUserUseCase implements IUseCase<IUserResponseDTO> {
+export class GetUserUseCase implements IUseCase<IUserResponseDTO> {
   constructor (@inject('UsersRepository') private readonly usersRepository: IUsersRepository) {}
 
   async execute (id: string) {
@@ -18,5 +18,3 @@ class GetUserUseCase implements IUseCase<IUserResponseDTO> {
     return UserMap.toDTO(user)
   }
 }
-
-export { GetUserUseCase }

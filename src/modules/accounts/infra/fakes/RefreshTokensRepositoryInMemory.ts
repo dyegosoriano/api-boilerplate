@@ -1,9 +1,9 @@
 import { ICreateRefreshTokensDTO } from '@modules/accounts/domains/DTOs/ICreateRefreshTokensDTO'
 import { IFindByRefreshTokensDTO } from '@modules/accounts/domains/DTOs/IFindByRefreshTokensDTO'
 import { IRefreshTokensRepository } from '@modules/accounts/domains/repositories/IRefreshTokensRepository'
-import { RefreshTokens } from '@modules/accounts/entities/RefreshTokens'
+import { RefreshTokens } from '@modules/accounts/entities/RefreshToken'
 
-class RefreshTokensRepositoryInMemory implements IRefreshTokensRepository {
+export class RefreshTokensRepositoryInMemory implements IRefreshTokensRepository {
   private repository: RefreshTokens[] = []
 
   async create ({ expires_date, user_id }: ICreateRefreshTokensDTO): Promise<RefreshTokens> {
@@ -33,5 +33,3 @@ class RefreshTokensRepositoryInMemory implements IRefreshTokensRepository {
     this.repository = this.repository.filter(refreshToken => refreshToken.id !== id)
   }
 }
-
-export { RefreshTokensRepositoryInMemory }

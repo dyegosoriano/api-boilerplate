@@ -3,10 +3,10 @@ import { ICreateUserDTO } from '@modules/accounts/domains/DTOs/ICreateUserDTO'
 import { IUser } from '@modules/accounts/domains/models/IUser'
 import { IFindAllUsersDTO } from '@modules/accounts/domains/DTOs/IFindAllUsersDTO'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
-import { User } from '@modules/accounts/entities/Users'
+import { User } from '@modules/accounts/entities/User'
 import { IFindAllUsersResultDTO } from '@modules/accounts/domains/DTOs/IFindAllUsersResultDTO'
 
-class UsersRepository implements IUsersRepository {
+export class UsersRepository implements IUsersRepository {
   async create({ password, email, name }: ICreateUserDTO): Promise<IUser> {
     const user = new User()
 
@@ -42,5 +42,3 @@ class UsersRepository implements IUsersRepository {
     return { total_users, users }
   }
 }
-
-export { UsersRepository }

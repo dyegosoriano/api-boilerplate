@@ -2,9 +2,9 @@ import { prisma } from '@infra/prisma/client'
 import { ICreateRefreshTokensDTO } from '@modules/accounts/domains/DTOs/ICreateRefreshTokensDTO'
 import { IFindByRefreshTokensDTO } from '@modules/accounts/domains/DTOs/IFindByRefreshTokensDTO'
 import { IRefreshTokensRepository } from '@modules/accounts/domains/repositories/IRefreshTokensRepository'
-import { RefreshTokens } from '@modules/accounts/entities/RefreshTokens'
+import { RefreshTokens } from '@modules/accounts/entities/RefreshToken'
 
-class RefreshTokensRepository implements IRefreshTokensRepository {
+export class RefreshTokensRepository implements IRefreshTokensRepository {
   async create({ expires_date, user_id }: ICreateRefreshTokensDTO): Promise<RefreshTokens> {
     const refreshToken = new RefreshTokens()
 
@@ -25,5 +25,3 @@ class RefreshTokensRepository implements IRefreshTokensRepository {
     await prisma.refreshTokens.delete({ where: { id } })
   }
 }
-
-export { RefreshTokensRepository }

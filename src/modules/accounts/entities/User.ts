@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid'
 
 import { IRole, IUser } from '../domains/models/IUser'
 
-class User implements IUser {
+export class User implements IUser {
   id: string
 
   password: string
@@ -22,5 +22,3 @@ class User implements IUser {
     }
   }
 }
-
-export { User }

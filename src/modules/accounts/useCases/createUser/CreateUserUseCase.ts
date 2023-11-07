@@ -10,7 +10,7 @@ import { IHashProvider } from '@shared/container/providers/HashProvider/models/I
 import { AppError } from '@shared/errors/AppError'
 
 @injectable()
-class CreateUserUseCase implements IUseCase<IUserResponseDTO> {
+export class CreateUserUseCase implements IUseCase<IUserResponseDTO> {
   constructor (
     @inject('UsersRepository') private readonly usersRepository: IUsersRepository,
     @inject('HashProvider') private readonly hashProvider: IHashProvider
@@ -29,5 +29,3 @@ class CreateUserUseCase implements IUseCase<IUserResponseDTO> {
     return UserMap.toDTO(user)
   }
 }
-
-export { CreateUserUseCase }

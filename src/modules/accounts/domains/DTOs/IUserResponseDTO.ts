@@ -1,6 +1,6 @@
 import { IRole } from '../models/IUser'
 
-interface IUserResponseDTO {
+export interface IUserResponseDTO {
   id: string
   name: string
   email: string
@@ -14,5 +14,3 @@ interface IUserResponseDTO {
   updated_at: Date
   created_at: Date
 }
-
-export { IUserResponseDTO }

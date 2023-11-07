@@ -16,7 +16,7 @@ import { AppError } from '@shared/errors/AppError'
 type IRequest = z.infer<typeof validationAuthenticateUser>
 
 @injectable()
-class AuthenticateUserUseCase implements IUseCase<IUserResponseDTO> {
+export class AuthenticateUserUseCase implements IUseCase<IUserResponseDTO> {
   constructor (
     @inject('RefreshTokensRepository') private readonly refreshTokensRepository: IRefreshTokensRepository,
     @inject('UsersRepository') private readonly usersRepository: IUsersRepository,
@@ -50,5 +50,3 @@ class AuthenticateUserUseCase implements IUseCase<IUserResponseDTO> {
     return response
   }
 }
-
-export { AuthenticateUserUseCase }

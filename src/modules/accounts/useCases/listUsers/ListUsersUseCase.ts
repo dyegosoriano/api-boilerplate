@@ -7,7 +7,7 @@ import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersR
 import { UserMap } from '@modules/accounts/mappers/UserMap'
 
 @injectable()
-class ListUsersUseCase implements IUseCase<IUserResponseDTO[]> {
+export class ListUsersUseCase implements IUseCase<IUserResponseDTO[]> {
   constructor (@inject('UsersRepository') private readonly usersRepository: IUsersRepository) {}
 
   async execute ({ page_size = 10, page = 1, email, name }: IFindAllUsersDTO) {
@@ -21,5 +21,3 @@ class ListUsersUseCase implements IUseCase<IUserResponseDTO[]> {
     }
   }
 }
-
-export { ListUsersUseCase }

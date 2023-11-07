@@ -1,4 +1,4 @@
-interface IDateProvider {
+export interface IDateProvider {
   compareIfBefore(start_date: Date, end_date: Date): boolean
   compareIfAfter(start_date: Date, end_date: Date): boolean
   compareInHours(start_date: Date, end_date: Date): number
@@ -8,5 +8,3 @@ interface IDateProvider {
   addDays(days: number): Date
   dateNow(): Date
 }
-
-export { IDateProvider }

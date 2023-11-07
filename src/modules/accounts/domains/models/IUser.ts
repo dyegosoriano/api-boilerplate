@@ -1,15 +1,5 @@
-type IRole = 'ADMIN' | 'USER'
+import { Users } from '@prisma/client'
 
-interface IUser {
-  id: string
+export type IRole = 'ADMIN' | 'USER'
 
-  password: string
-  roles: IRole[]
-  email: string
-  name: string
-
-  updated_at: Date
-  created_at: Date
-}
-
-export { IUser, IRole }
+export type IUser = Users

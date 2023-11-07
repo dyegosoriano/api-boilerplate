@@ -5,7 +5,7 @@ import { IDateProvider } from '../models/IDateProvider'
 
 dayjs.extend(utc)
 
-class DayjsDateProvider implements IDateProvider {
+export class DayjsDateProvider implements IDateProvider {
   compareInHours (start_date: Date, end_date: Date): number {
     const start_date_utc = this.convertToUTC(start_date)
     const end_date_utc = this.convertToUTC(end_date)
@@ -44,5 +44,3 @@ class DayjsDateProvider implements IDateProvider {
     return dayjs(start_date).isAfter(end_date)
   }
 }
-
-export { DayjsDateProvider }

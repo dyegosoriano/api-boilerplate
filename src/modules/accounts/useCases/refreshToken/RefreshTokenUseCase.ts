@@ -17,7 +17,7 @@ interface IResponse {
 }
 
 @injectable()
-class RefreshTokenUseCase implements IUseCase<IResponse> {
+export class RefreshTokenUseCase implements IUseCase<IResponse> {
   constructor (
     @inject('RefreshTokensRepository') private readonly refreshTokensRepository: IRefreshTokensRepository,
     @inject('UsersRepository') private readonly usersRepository: IUsersRepository,
@@ -47,5 +47,3 @@ class RefreshTokenUseCase implements IUseCase<IResponse> {
     return { token }
   }
 }
-
-export { RefreshTokenUseCase }

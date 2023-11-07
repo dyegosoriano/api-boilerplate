@@ -1,8 +1,6 @@
 import { IUser } from '../models/IUser'
 
-interface IFindAllUsersResultDTO {
+export interface IFindAllUsersResultDTO {
   total_users: number
   users: IUser[]
 }
-
-export { IFindAllUsersResultDTO }

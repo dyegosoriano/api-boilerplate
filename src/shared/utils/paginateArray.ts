@@ -5,7 +5,7 @@ interface IParams {
   page: number
 }
 
-const paginateArray = ({ array, page, page_size }: IParams) => {
+export const paginateArray = ({ array, page, page_size }: IParams) => {
   // page_size = parseInt(page_size)
   // page = Math.abs(parseInt(page))
 
@@ -14,5 +14,3 @@ const paginateArray = ({ array, page, page_size }: IParams) => {
 
   return array.filter((value, index) => index >= page * page_size && index < (page + 1) * page_size)
 }
-
-export { paginateArray }

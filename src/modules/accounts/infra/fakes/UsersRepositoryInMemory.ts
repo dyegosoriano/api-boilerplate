@@ -3,10 +3,10 @@ import { IFindAllUsersDTO } from '@modules/accounts/domains/DTOs/IFindAllUsersDT
 import { IFindAllUsersResultDTO } from '@modules/accounts/domains/DTOs/IFindAllUsersResultDTO'
 import { IUser } from '@modules/accounts/domains/models/IUser'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
-import { User } from '@modules/accounts/entities/Users'
+import { User } from '@modules/accounts/entities/User'
 import { paginateArray } from '@shared/utils'
 
-class UsersRepositoryInMemory implements IUsersRepository {
+export class UsersRepositoryInMemory implements IUsersRepository {
   private repository: IUser[] = []
 
   async create ({ password, email, name }: ICreateUserDTO): Promise<IUser> {
@@ -36,5 +36,3 @@ class UsersRepositoryInMemory implements IUsersRepository {
     return { total_users: repoClone.length + 1, users: repoClone }
   }
 }
-
-export { UsersRepositoryInMemory }
