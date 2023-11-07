@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 
-import { IUseCase } from '@core/infra/IUseCase'
+import { IUseCase } from '@core/types/IUseCase'
 import { IUserResponseDTO } from '@modules/accounts/domains/DTOs/IUserResponseDTO'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
 import { UserMap } from '@modules/accounts/mappers/UserMap'

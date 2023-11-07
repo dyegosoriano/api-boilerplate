@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe'
 import { z } from 'zod'
 
 import { config_auth } from '@core/config/auth'
-import { IUseCase } from '@core/infra/IUseCase'
+import { IUseCase } from '@core/types/IUseCase'
 import { IUserResponseDTO } from '@modules/accounts/domains/DTOs/IUserResponseDTO'
 import { IRefreshTokensRepository } from '@modules/accounts/domains/repositories/IRefreshTokensRepository'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
