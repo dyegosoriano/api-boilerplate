@@ -1,18 +1,19 @@
 import { Redis as IoRedis } from 'ioredis'
 
-import config from '@core/config'
+import { config_redis } from '@core/config/redis'
+import { IRedisClient } from '@core/infra/IRedisClient'
 
-const minutes = 60 * 1
+const seconds = 60 * 1 // one minute
 
-class RedisClient {
+class RedisClient implements IRedisClient {
   private client
 
   constructor () {
-    this.client = new IoRedis(config.redis.url)
+    this.client = new IoRedis(config_redis.redis.url)
   }
 
-  public async save<T> (key: string, value: T, ttl = minutes): Promise<void> {
-    this.client.set(key, JSON.stringify(value), 'EX', ttl)
+  public async save<T> (key: string, value: T, ttl = seconds): Promise<void> {
+    await this.client.set(key, JSON.stringify(value), 'EX', ttl)
   }
 
   public async recover<T> (key: string): Promise<T | null> {

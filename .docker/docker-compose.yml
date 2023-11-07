@@ -10,7 +10,7 @@ services:
       - ${PORT}:${PORT}
       - 9229:9229
     environment:
-      - DATABASE_URL=postgres://${DB_USERNAME}:${DB_PASSWORD}@database:5432/${DB_NAME}?connect_timeout=300
+      - DATABASE_URL=boilerplate-database
       - REDIS_URL=boilerplate-redis
     volumes:
       - .:/usr/app
