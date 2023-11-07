@@ -1,3 +1,3 @@
 export interface IUseCase<Response> {
-  execute: (data: any) => Promise<Response | void>
+  execute: (...data: any) => Promise<Response | void>
 }

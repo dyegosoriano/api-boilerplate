@@ -1,7 +1,7 @@
 import JobQueue from 'bull'
 
 import config from '@core/config'
-import { IQueue, IQueueClient } from '@core/infra/queue'
+import { IQueue, IQueueClient } from '@core/infra/IQueue'
 
 import * as jobs from './jobs'
 

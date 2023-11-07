@@ -1,4 +1,4 @@
-import { IJobQueue } from '@core/infra/queue'
+import { IJobQueue } from '@core/infra/IQueue'
 
 class ConsoleLogJob implements IJobQueue {
   public key = 'ConsoleLog'
@@ -17,9 +17,7 @@ class ConsoleLogJob implements IJobQueue {
     const timeout = Math.floor(Math.random() * (maxTimeout - minTimeout + 1)) + minTimeout
     console.log('The job will take', Math.floor(timeout / 1000), 'seconds to process...')
 
-    setTimeout(() => {
-      console.log('ConsoleLog:', data)
-    }, timeout)
+    setTimeout(() => console.log('ConsoleLog:', data), timeout)
   }
 }
 

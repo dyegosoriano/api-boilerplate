@@ -37,7 +37,7 @@ describe('ListUsersUseCase', () => {
 
     const response = await listUsersUseCase.execute({ page_size: 2 })
 
-    expect(response.users.length).toEqual(2)
+    expect(response.results.length).toEqual(2)
   })
 
   it('should return a list of users that have the letters "ye" in the name', async () => {
@@ -47,7 +47,7 @@ describe('ListUsersUseCase', () => {
 
     const response = await listUsersUseCase.execute({ name: 'Ye' })
 
-    expect(response.users[0].name).toEqual('dyego')
+    expect(response.results[0].name).toEqual('dyego')
   })
 
   it('should return a list of users that have the letters "cc" in the email', async () => {
@@ -57,7 +57,7 @@ describe('ListUsersUseCase', () => {
 
     const response = await listUsersUseCase.execute({ email: 'Cc' })
 
-    expect(response.users[0].email).toEqual('rebecca@email.com')
+    expect(response.results[0].email).toEqual('rebecca@email.com')
   })
 
   it("should not be possible to return the user's password", async () => {
@@ -67,6 +67,6 @@ describe('ListUsersUseCase', () => {
 
     const response = await listUsersUseCase.execute({})
 
-    expect(response.users[0]).not.toHaveProperty('password')
+    expect(response.results[0]).not.toHaveProperty('password')
   })
 })
