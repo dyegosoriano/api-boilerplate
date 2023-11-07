@@ -3,6 +3,7 @@ import 'express-async-errors'
 import 'dotenv/config'
 
 import express, { Application } from 'express'
+import helmet from 'helmet'
 
 import { ensureSSL } from './middlewares/ensureSSL'
 import errorHandling from './middlewares/errorHandling'
@@ -37,6 +38,10 @@ export class AppServer {
 
   private middlewares () {
     if (process.env.NODE_ENV === 'production') this.server.use(ensureSSL)
+
+    this.server.disable('x-powered-by')
+    this.server.use(helmet())
+
     this.server.use(express.json())
   }
 
