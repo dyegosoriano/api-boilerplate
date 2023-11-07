@@ -29,4 +29,4 @@ COPY --chown=node:node --from=BUILDER /usr/app/ ./
 EXPOSE 9229
 EXPOSE 3333
 
-CMD ["yarn", "start"]
+CMD ["yarn", "start:server"]
