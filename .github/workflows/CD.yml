@@ -1,4 +1,4 @@
-name: CI-CD
+name: CD
 
 on:
   push:
@@ -9,6 +9,10 @@ jobs:
   CD:
     needs: [CI]
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
 
     steps:
       - name: Checkout Repository
