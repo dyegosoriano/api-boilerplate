@@ -1,5 +1,6 @@
 import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
+import { z } from 'zod'
 
 import { config_auth } from '@core/config/auth'
 import { IUseCase } from '@core/types/IUseCase'
@@ -7,14 +8,12 @@ import { IRefreshTokensRepository } from '@modules/accounts/domains/repositories
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
 import { IDateProvider } from '@shared/container/providers/DateProvider/models/IDateProvider'
 import { AppError } from '@shared/errors/AppError'
+import { errors } from '@shared/errors/constants'
 
-interface IRequest {
-  refresh_token: string
-}
+const validationRefreshToken = z.object({ refresh_token: z.string().uuid(errors.id) })
 
-interface IResponse {
-  token: string
-}
+type IRequest = z.infer<typeof validationRefreshToken>
+type IResponse = { token: string }
 
 @injectable()
 export class RefreshTokenUseCase implements IUseCase<IResponse> {
@@ -24,10 +23,10 @@ export class RefreshTokenUseCase implements IUseCase<IResponse> {
     @inject('DateProvider') private readonly dateProvider: IDateProvider
   ) {}
 
-  async execute ({ refresh_token }: IRequest) {
-    if (!refresh_token) throw new AppError('Refresh token is required')
+  async execute (data: IRequest) {
+    const valid_data = validationRefreshToken.parse(data)
 
-    const refreshTokenAlreadyExists = await this.refreshTokensRepository.findByRefreshToken({ refresh_token })
+    const refreshTokenAlreadyExists = await this.refreshTokensRepository.findByRefreshToken(valid_data)
     if (!refreshTokenAlreadyExists) throw new AppError('Refresh token does not exist')
 
     const user = await this.usersRepository.findById(refreshTokenAlreadyExists.user_id)

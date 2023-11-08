@@ -21,10 +21,12 @@ export const validationListUsers = z.object({
   page_size: z
     .string(errors.pagination_required)
     .regex(/[1-9]+/, errors.pagination)
-    .transform(number => +number),
+    .transform(number => +number)
+    .or(z.number(errors.pagination_required).int(errors.pagination_int).positive(errors.pagination_positive)),
 
   page: z
     .string(errors.pagination_required)
     .regex(/[1-9]+/, errors.pagination)
     .transform(number => +number)
+    .or(z.number(errors.pagination_required).int(errors.pagination_int).positive(errors.pagination_positive))
 })
