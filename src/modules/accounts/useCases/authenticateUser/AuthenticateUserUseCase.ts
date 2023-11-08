@@ -13,10 +13,11 @@ import { IDateProvider } from '@shared/container/providers/DateProvider/models/I
 import { IHashProvider } from '@shared/container/providers/HashProvider/models/IHashProvider'
 import { AppError } from '@shared/errors/AppError'
 
+type IAuthentication = { authentication: { refresh_token: string; token: string } }
 type IRequest = z.infer<typeof validationAuthenticateUser>
 
 @injectable()
-export class AuthenticateUserUseCase implements IUseCase<IUserResponseDTO> {
+export class AuthenticateUserUseCase implements IUseCase<IUserResponseDTO & IAuthentication> {
   constructor (
     @inject('RefreshTokensRepository') private readonly refreshTokensRepository: IRefreshTokensRepository,
     @inject('UsersRepository') private readonly usersRepository: IUsersRepository,
@@ -24,7 +25,7 @@ export class AuthenticateUserUseCase implements IUseCase<IUserResponseDTO> {
     @inject('DateProvider') private readonly dateProvider: IDateProvider
   ) {}
 
-  async execute (data: IRequest) {
+  async execute (data: IRequest): Promise<IUserResponseDTO & IAuthentication> {
     const valid_data = validationAuthenticateUser.parse(data)
 
     const user = await this.usersRepository.findByEmail(valid_data.email)
@@ -45,8 +46,10 @@ export class AuthenticateUserUseCase implements IUseCase<IUserResponseDTO> {
     })
 
     const response = UserMap.toDTO(user)
-    Object.assign(response, { authentication: { refresh_token, token } })
 
-    return response
+    return {
+      ...response,
+      authentication: { refresh_token, token }
+    }
   }
 }
