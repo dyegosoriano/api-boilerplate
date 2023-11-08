@@ -2,8 +2,7 @@ import { inject, injectable } from 'tsyringe'
 
 import { IResultList } from '@core/types/IResultList'
 import { IUseCase } from '@core/types/IUseCase'
-import { IFindAllUsersDTO } from '@modules/accounts/domains/DTOs/IFindAllUsersDTO'
-import { IUserResponseDTO } from '@modules/accounts/domains/DTOs/IUserResponseDTO'
+import { IFindAllUsersDTO, IUserResponseDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
 import { UserMap } from '@modules/accounts/mappers/UserMap'
 

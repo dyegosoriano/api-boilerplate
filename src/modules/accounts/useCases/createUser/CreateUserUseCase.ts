@@ -1,11 +1,10 @@
 import { inject, injectable } from 'tsyringe'
 
 import { IUseCase } from '@core/types/IUseCase'
-import { ICreateUserDTO } from '@modules/accounts/domains/DTOs/ICreateUserDTO'
-import { IUserResponseDTO } from '@modules/accounts/domains/DTOs/IUserResponseDTO'
+import { ICreateUserDTO, IUserResponseDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
 import { UserMap } from '@modules/accounts/mappers/UserMap'
-import { validationCreateUser } from '@modules/accounts/validations/validationCreateUser'
+import { validationCreateUser } from '@modules/accounts/validations/validationsUsers'
 import { IHashProvider } from '@shared/container/providers/HashProvider/models/IHashProvider'
 import { AppError } from '@shared/errors/AppError'
 

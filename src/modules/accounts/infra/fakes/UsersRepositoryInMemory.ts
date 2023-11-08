@@ -1,6 +1,4 @@
-import { ICreateUserDTO } from '@modules/accounts/domains/DTOs/ICreateUserDTO'
-import { IFindAllUsersDTO } from '@modules/accounts/domains/DTOs/IFindAllUsersDTO'
-import { IFindAllUsersResultDTO } from '@modules/accounts/domains/DTOs/IFindAllUsersResultDTO'
+import { ICreateUserDTO, IFindAllUsersDTO, IFindAllUsersResultDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
 import { IUser } from '@modules/accounts/domains/models/IUser'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
 import { User } from '@modules/accounts/entities/User'
