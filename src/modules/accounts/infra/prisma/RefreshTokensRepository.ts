@@ -1,6 +1,5 @@
 import { prisma } from '@infra/prisma/client'
-import { ICreateRefreshTokensDTO } from '@modules/accounts/domains/DTOs/ICreateRefreshTokensDTO'
-import { IFindByRefreshTokensDTO } from '@modules/accounts/domains/DTOs/IFindByRefreshTokensDTO'
+import { ICreateRefreshTokensDTO, IFindByRefreshTokensDTO } from '@modules/accounts/domains/DTOs/IRefreshTokensDTOs'
 import { IRefreshTokensRepository } from '@modules/accounts/domains/repositories/IRefreshTokensRepository'
 import { RefreshTokens } from '@modules/accounts/entities/RefreshToken'
 

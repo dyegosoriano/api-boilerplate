@@ -30,3 +30,13 @@ export const validationListUsers = z.object({
     .transform(number => +number)
     .or(z.number(errors.pagination_required).int(errors.pagination_int).positive(errors.pagination_positive))
 })
+
+export const validationAuthenticateUser = z.object({
+  email: z.string(errors.required_field).max(100, errors.email_max).min(6, errors.email_min).email(errors.email),
+
+  password: z
+    .string(errors.pagination_required)
+    .regex(regex_password, errors.password_regex)
+    .max(16, errors.password_max)
+    .min(8, errors.password_min)
+})

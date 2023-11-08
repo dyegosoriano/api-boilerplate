@@ -1,6 +1,6 @@
 import { filterObject } from '@shared/utils'
 
-import { IUserResponseDTO } from '../domains/DTOs/IUserResponseDTO'
+import { IUserResponseDTO } from '../domains/DTOs/IUsersDTOs'
 import { User } from '../entities/User'
 
 export class UserMap {

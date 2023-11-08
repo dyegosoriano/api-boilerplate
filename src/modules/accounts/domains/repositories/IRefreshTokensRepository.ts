@@ -1,7 +1,6 @@
 import { RefreshTokens } from '@modules/accounts/entities/RefreshToken'
 
-import { ICreateRefreshTokensDTO } from '../DTOs/ICreateRefreshTokensDTO'
-import { IFindByRefreshTokensDTO } from '../DTOs/IFindByRefreshTokensDTO'
+import { ICreateRefreshTokensDTO, IFindByRefreshTokensDTO } from '../DTOs/IRefreshTokensDTOs'
 
 export interface IRefreshTokensRepository {
   findByRefreshToken({ refresh_token, user_id }: IFindByRefreshTokensDTO): Promise<RefreshTokens>

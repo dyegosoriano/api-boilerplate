@@ -8,7 +8,7 @@ export class ListUsersController {
     const { query } = request
 
     const lisUsersUseCase = container.resolve(ListUsersUseCase)
-    const users = await lisUsersUseCase.execute(query)
+    const users = await lisUsersUseCase.execute(query as any)
 
     return response.status(200).json(users)
   }
