@@ -1,7 +1,30 @@
 import { z } from 'zod'
 
+import { errors } from '@shared/errors/constants'
+const regex_password = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/
+
 export const validationCreateUser = z.object({
-  password: z.string().min(8, 'Password must be at least 8 characters').max(16, 'Password must be at most 16 characters').regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, 'Password must contain at least one number or letter').nonempty('Required field'),
-  email: z.string().email('Provide a valid email').min(6, 'Email must be at least 6 characters').max(100, 'Email must be at most 100 characters').nonempty('Required field'),
-  name: z.string().min(3, 'Name must be at least 3 characters').max(100, 'Name must be at most 100 characters').nonempty('Required field')
+  email: z.string(errors.required_field).max(100, errors.email_max).min(6, errors.email_min).email(errors.email),
+  name: z.string(errors.name_required).max(100, errors.name_max).min(3, errors.name_min),
+
+  password: z
+    .string(errors.pagination_required)
+    .regex(regex_password, errors.password_regex)
+    .max(16, errors.password_max)
+    .min(8, errors.password_min)
+})
+
+export const validationListUsers = z.object({
+  email: z.string().max(100, errors.email_max).min(6, errors.email_min).email(errors.email).optional(),
+  name: z.string().max(100, errors.name_max).min(3, errors.name_min).optional(),
+
+  page_size: z
+    .string(errors.pagination_required)
+    .regex(/[1-9]+/, errors.pagination)
+    .transform(number => +number),
+
+  page: z
+    .string(errors.pagination_required)
+    .regex(/[1-9]+/, errors.pagination)
+    .transform(number => +number)
 })

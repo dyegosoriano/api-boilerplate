@@ -1,4 +1,5 @@
-import { ICreateUserDTO, IFindAllUsersDTO, IFindAllUsersResultDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
+import { IFindAllUsersResults } from '@core/types/IFindAllUsersResults'
+import { ICreateUserDTO, IFindAllUsersDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
 import { IUser } from '@modules/accounts/domains/models/IUser'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
 import { User } from '@modules/accounts/entities/User'
@@ -23,7 +24,7 @@ export class UsersRepositoryInMemory implements IUsersRepository {
     return this.repository.find(user => user.id === id) as IUser
   }
 
-  async findAll ({ page_size = 10, page = 1, email, name }: IFindAllUsersDTO): Promise<IFindAllUsersResultDTO> {
+  async findAll ({ page_size = 10, page = 1, email, name }: IFindAllUsersDTO): Promise<IFindAllUsersResults<IUser>> {
     let repoClone = this.repository
 
     if (email) repoClone = repoClone.filter(item => item.email.toUpperCase().includes(email.toUpperCase()))
@@ -31,6 +32,6 @@ export class UsersRepositoryInMemory implements IUsersRepository {
 
     if (page_size && page) repoClone = paginateArray({ array: repoClone, page, page_size })
 
-    return { total_users: repoClone.length + 1, users: repoClone }
+    return { total: repoClone.length + 1, results: repoClone }
   }
 }

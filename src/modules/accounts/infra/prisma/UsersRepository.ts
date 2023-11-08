@@ -1,5 +1,6 @@
+import { IFindAllUsersResults } from '@core/types/IFindAllUsersResults'
 import { prisma } from '@infra/prisma/client'
-import { ICreateUserDTO, IFindAllUsersDTO, IFindAllUsersResultDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
+import { ICreateUserDTO, IFindAllUsersDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
 import { IUser } from '@modules/accounts/domains/models/IUser'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
 import { User } from '@modules/accounts/entities/User'
@@ -21,13 +22,13 @@ export class UsersRepository implements IUsersRepository {
     return await prisma.users.findUnique({ where: { id } })
   }
 
-  async findAll({ page_size = 10, page = 1, email, name }: IFindAllUsersDTO): Promise<IFindAllUsersResultDTO> {
+  async findAll({ page_size = 10, page = 1, email, name }: IFindAllUsersDTO): Promise<IFindAllUsersResults<IUser>> {
     const where = {}
 
     if (!!email) Object.assign(where, { email: { contains: email, mode: 'insensitive' } })
     if (!!name) Object.assign(where, { name: { contains: name, mode: 'insensitive' } })
 
-    const [total_users, users] = await prisma.$transaction([
+    const [total, results] = await prisma.$transaction([
       prisma.users.count({ where }),
       prisma.users.findMany({
         skip: +page === 0 || +page === 1 ? 0 : page * page_size,
@@ -37,6 +38,6 @@ export class UsersRepository implements IUsersRepository {
       })
     ])
 
-    return { total_users, users }
+    return { total, results }
   }
 }
