@@ -1,4 +1,4 @@
-import { IFindAllUsersResults } from '@core/types/IFindAllUsersResults'
+import { IFindAllUsersResults } from '@core/types/utils/IFindAllUsersResults'
 import { prisma } from '@infra/prisma/client'
 import { ICreateUserDTO, IFindAllUsersDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
 import { IUser } from '@modules/accounts/domains/models/IUser'

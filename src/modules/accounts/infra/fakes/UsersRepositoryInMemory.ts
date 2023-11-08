@@ -1,4 +1,4 @@
-import { IFindAllUsersResults } from '@core/types/IFindAllUsersResults'
+import { IFindAllUsersResults } from '@core/types/utils/IFindAllUsersResults'
 import { ICreateUserDTO, IFindAllUsersDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
 import { IUser } from '@modules/accounts/domains/models/IUser'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'

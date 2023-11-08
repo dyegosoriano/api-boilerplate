@@ -1,7 +1,7 @@
 import { Redis as IoRedis } from 'ioredis'
 
 import { config_redis } from '@core/config/redis'
-import { IRedisClient } from '@core/infra/IRedisClient'
+import { IRedisClient } from '@core/types/infra/IRedisClient'
 
 const seconds = 60 * 1 // one minute
 

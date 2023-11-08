@@ -1,4 +1,4 @@
-import { IJobQueue } from '@core/infra/IQueue'
+import { IJobQueue } from '@core/types/infra/IQueue'
 
 class ConsoleLogJob implements IJobQueue {
   public key = 'ConsoleLog'

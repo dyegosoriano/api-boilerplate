@@ -1,7 +1,7 @@
 import JobQueue from 'bull'
 
 import { config_redis } from '@core/config/redis'
-import { IQueue, IQueueClient } from '@core/infra/IQueue'
+import { IQueue, IQueueClient } from '@core/types/infra/IQueue'
 
 import * as jobs from './jobs'
 

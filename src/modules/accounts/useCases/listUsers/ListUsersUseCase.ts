@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 
-import { IResultList } from '@core/types/IResultList'
-import { IUseCase } from '@core/types/IUseCase'
+import { IUseCase } from '@core/types/structures/IUseCase'
+import { IResultList } from '@core/types/utils/IResultList'
 import { IFindAllUsersDTO, IUserResponseDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
 import { UserMap } from '@modules/accounts/mappers/UserMap'

@@ -1,4 +1,4 @@
-import { IAppError } from '@core/types/IAppError'
+import { IAppError } from '@core/types/utils/IAppError'
 
 export class AppError implements IAppError {
   public readonly statusCode: number
