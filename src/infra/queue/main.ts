@@ -31,9 +31,13 @@ class QueueClient implements IQueueClient {
     console.log('Queue initialized successfully! 🚀 ')
   }
 
-  public add (name: string, data: object) {
+  public add (name: string, data: object, options?: JobQueue.JobOptions) {
     const queue = this.queues.find((queue: IQueue) => queue.name === name)
-    if (queue) queue.bull.add(data, queue.options)
+
+    if (queue) {
+      if (options) Object.assign(queue.options, options)
+      queue.bull.add(data, queue.options)
+    }
   }
 
   public process () {

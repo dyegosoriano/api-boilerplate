@@ -1,7 +1,7 @@
 import Bull from 'bull'
 
 export interface IQueueClient {
-  add(name: string, data: object, jobOptions?: Bull.JobOptions): void
+  add(name: string, data: object, options?: Bull.JobOptions): void
   process(): void
 }
 

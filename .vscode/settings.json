@@ -1,15 +1,11 @@
 {
+  "cSpell.words": ["commitlint", "dayjs", "prestart", "respawn"],
+  "code-runner.executorMap": { "typescript": "yarn tsx" },
   "editor.formatOnPaste": false,
   "editor.formatOnSave": true,
-  "[prisma]": { 
+  "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma",
     "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-  },
-  "cSpell.words": [
-    "commitlint",
-    "dayjs",
-    "prestart",
-    "respawn"
-  ],
+    "editor.formatOnSave": true
+  }
 }
