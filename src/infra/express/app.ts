@@ -5,11 +5,10 @@ import 'dotenv/config'
 import express, { Application } from 'express'
 import helmet from 'helmet'
 
+import '@shared/container'
 import { ensureSSL } from './middlewares/ensureSSL'
 import errorHandling from './middlewares/errorHandling'
-import { routes } from './routes'
-
-import '@shared/container'
+import { expressSetupRoutes } from './utils/expressSetupRoutes'
 
 export class AppServer {
   private readonly server: Application
@@ -46,6 +45,6 @@ export class AppServer {
   }
 
   private routes () {
-    this.server.use(routes)
+    expressSetupRoutes(this.server)
   }
 }
