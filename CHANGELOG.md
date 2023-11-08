@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/dyegosoriano/api-boilerplate/compare/v1.5.0...v1.6.0) (2023-11-08)
+
+
+### Features
+
+* **expresssetuproutes:** creation of the automatic express route import function ([f5e30e5](https://github.com/dyegosoriano/api-boilerplate/commit/f5e30e56fe62e3eeee4d72cda12129cf8f935b55))
+* **package.json:** adjustments to server startup script and production queues ([08ae578](https://github.com/dyegosoriano/api-boilerplate/commit/08ae57824fa6e661331aaebe4aa57080c7835460))
+
 ## [1.5.0](https://github.com/dyegosoriano/api-boilerplate/compare/v1.4.0...v1.5.0) (2023-11-07)
 
 
