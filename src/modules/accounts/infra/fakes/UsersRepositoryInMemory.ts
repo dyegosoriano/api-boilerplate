@@ -1,4 +1,4 @@
-import { IFindAllUsersResults } from '@core/types/utils/IFindAllUsersResults'
+import { IFindAllResults } from '@core/types/utils/IFindAllResults'
 import { ICreateUserDTO, IFindAllUsersDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
 import { IUser } from '@modules/accounts/domains/models/IUser'
 import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
@@ -24,7 +24,7 @@ export class UsersRepositoryInMemory implements IUsersRepository {
     return this.repository.find(user => user.id === id) as IUser
   }
 
-  async findAll ({ page_size = 10, page = 1, email, name }: IFindAllUsersDTO): Promise<IFindAllUsersResults<IUser>> {
+  async findAll ({ page_size = 10, page = 1, email, name }: IFindAllUsersDTO): Promise<IFindAllResults<IUser>> {
     let repoClone = this.repository
 
     if (email) repoClone = repoClone.filter(item => item.email.toUpperCase().includes(email.toUpperCase()))

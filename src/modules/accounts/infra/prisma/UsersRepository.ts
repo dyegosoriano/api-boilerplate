@@ -1,4 +1,4 @@
-import { IFindAllUsersResults } from '@core/types/utils/IFindAllUsersResults'
+import { IFindAllResults } from '@core/types/utils/IFindAllResults'
 import { prisma } from '@infra/prisma/client'
 import { ICreateUserDTO, IFindAllUsersDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
 import { IUser } from '@modules/accounts/domains/models/IUser'
@@ -22,7 +22,7 @@ export class UsersRepository implements IUsersRepository {
     return await prisma.users.findUnique({ where: { id } })
   }
 
-  async findAll({ page_size = 10, page = 1, email, name }: IFindAllUsersDTO): Promise<IFindAllUsersResults<IUser>> {
+  async findAll({ page_size = 10, page = 1, email, name }: IFindAllUsersDTO): Promise<IFindAllResults<IUser>> {
     const where = {}
 
     if (!!email) Object.assign(where, { email: { contains: email, mode: 'insensitive' } })
