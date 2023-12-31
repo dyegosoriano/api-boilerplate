@@ -6,11 +6,11 @@ import { RefreshTokenController } from '@modules/accounts/useCases/refreshToken/
 const authenticateUserController = new AuthenticateUserController()
 const refreshTokenController = new RefreshTokenController()
 
+const path_route = '/authenticate'
 const routes = Router()
 
 routes
-  .use('/authenticate', routes)
-  .post('/refresh-token', refreshTokenController.handle)
-  .post('/sessions', authenticateUserController.handle)
+  .post(path_route + '/refresh-token', refreshTokenController.handle)
+  .post(path_route + '/sessions', authenticateUserController.handle)
 
 export { routes }

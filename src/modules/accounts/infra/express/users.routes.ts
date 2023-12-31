@@ -10,13 +10,13 @@ const createUserController = new CreateUserController()
 const listUsersController = new ListUsersController()
 const getUserController = new GetUserController()
 
+const path_route = '/users'
 const routes = Router()
 
 routes
-  .use('/users', routes)
   .use(ensureAuthenticate, permissions(['USER', 'ADMIN']))
-  .post('/', createUserController.handle)
-  .get('/:id', getUserController.handle)
-  .get('/', listUsersController.handle)
+  .post(path_route, createUserController.handle)
+  .get(path_route + '/:id', getUserController.handle)
+  .get(path_route, listUsersController.handle)
 
 export { routes }
