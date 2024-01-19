@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.3](https://github.com/dyegosoriano/api-boilerplate/compare/v1.6.2...v1.6.3) (2024-01-19)
+
+
+### Bug Fixes
+
+* **listusersusecase:** correction in the pagination functionality of the user list ([bdf0d5c](https://github.com/dyegosoriano/api-boilerplate/commit/bdf0d5c4dbc36beca94cd33c3f5e3108327ccfaf))
+* **src/modules/**/infra/express/*.routes.ts:** correction in route input ([2115f77](https://github.com/dyegosoriano/api-boilerplate/commit/2115f773102f108c02ec324178add2f4d65133b8))
+
 ### [1.6.2](https://github.com/dyegosoriano/api-boilerplate/compare/v1.6.1...v1.6.2) (2023-11-21)
 
 ### [1.6.1](https://github.com/dyegosoriano/api-boilerplate/compare/v1.6.0...v1.6.1) (2023-11-08)
