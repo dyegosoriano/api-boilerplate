@@ -26,12 +26,13 @@ export class UsersRepositoryInMemory implements IUsersRepository {
 
   async findAll ({ page_size = 10, page = 1, email, name }: IFindAllUsersDTO): Promise<IFindAllResults<IUser>> {
     let repoClone = this.repository
+    let repoPaginate = repoClone
 
     if (email) repoClone = repoClone.filter(item => item.email.toUpperCase().includes(email.toUpperCase()))
     if (name) repoClone = repoClone.filter(item => item.name.toUpperCase().includes(name.toUpperCase()))
 
-    if (page_size && page) repoClone = paginateArray({ array: repoClone, page, page_size })
+    if (page_size && page) repoPaginate = paginateArray({ array: repoClone, page, page_size })
 
-    return { total: repoClone.length + 1, results: repoClone }
+    return { total: repoClone.length, results: repoPaginate }
   }
 }

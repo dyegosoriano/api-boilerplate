@@ -17,7 +17,7 @@ export class ListUsersUseCase implements IUseCase<IResultList<IUserResponseDTO>>
     const { total, results } = await this.usersRepository.findAll(valid_data)
 
     return {
-      total_pages: Math.floor(total / valid_data.page_size),
+      total_pages: Math.ceil(total / valid_data.page_size),
       total: total,
       page_size: +valid_data.page_size,
       page: +valid_data.page,

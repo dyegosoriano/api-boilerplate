@@ -52,4 +52,11 @@ describe('ListUsersUseCase', () => {
     const response = await listUsersUseCase.execute({ page_size: 2, page: 1 })
     expect(response.results[0]).not.toHaveProperty('password')
   })
+
+  it('must return a total of 3 pages and the pagination must contain 2 items', async () => {
+    const response = await listUsersUseCase.execute({ page_size: 2, page: 1 })
+
+    expect(response.total_pages).toEqual(2)
+    expect(response.total).toEqual(3)
+  })
 })
