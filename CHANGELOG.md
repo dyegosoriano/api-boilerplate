@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.4](https://github.com/dyegosoriano/api-boilerplate/compare/v1.6.3...v1.6.4) (2024-02-13)
+
+
+### Bug Fixes
+
+* fix no workflow does github actions ([aae20b8](https://github.com/dyegosoriano/api-boilerplate/commit/aae20b887f426d3875c992900baada926727d543))
+
 ### [1.6.3](https://github.com/dyegosoriano/api-boilerplate/compare/v1.6.2...v1.6.3) (2024-01-19)
 
 
