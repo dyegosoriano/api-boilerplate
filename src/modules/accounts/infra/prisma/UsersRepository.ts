@@ -22,11 +22,11 @@ export class UsersRepository implements IUsersRepository {
     return await prisma.users.findUnique({ where: { id } })
   }
 
-  async findAll({ page_size = 10, page = 1, email, name }: IFindAllUsersDTO): Promise<IFindAllResults<IUser>> {
+  async findAll({ page_size = 10, page = 1, ...filters }: IFindAllUsersDTO): Promise<IFindAllResults<IUser>> {
     const where = {}
 
-    if (!!email) Object.assign(where, { email: { contains: email, mode: 'insensitive' } })
-    if (!!name) Object.assign(where, { name: { contains: name, mode: 'insensitive' } })
+    if (!!filters.email) Object.assign(where, { email: { contains: filters.email, mode: 'insensitive' } })
+    if (!!filters.name) Object.assign(where, { name: { contains: filters.name, mode: 'insensitive' } })
 
     const [total, results] = await prisma.$transaction([
       prisma.users.count({ where }),
