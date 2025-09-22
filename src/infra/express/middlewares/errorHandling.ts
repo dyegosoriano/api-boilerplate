@@ -10,7 +10,7 @@ export default {
   },
 
   globalErrors (error: Error, _req: Request, res: Response, _next: NextFunction) {
-    if (error instanceof AppError) return res.status(error.statusCode).json(error)
+    if (error instanceof AppError) return res.status(error.code).json(error)
 
     if (error instanceof z.ZodError) {
       return res.status(400).json({

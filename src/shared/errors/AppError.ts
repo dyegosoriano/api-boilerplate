@@ -1,13 +1,11 @@
-import { IAppError } from '@core/types/utils/IAppError'
-
-export class AppError implements IAppError {
-  public readonly statusCode: number
+export class AppError extends Error {
   public readonly success: boolean
   public readonly message: string
+  public readonly code: number
 
-  constructor (message: string, statusCode = 400) {
+  constructor (message: string, code = 400) {
+    super(message)
     this.success = false
-    this.statusCode = statusCode
-    this.message = message
+    this.code = code
   }
 }
