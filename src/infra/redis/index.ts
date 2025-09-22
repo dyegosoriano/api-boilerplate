@@ -12,16 +12,15 @@ class RedisClient implements IRedisClient {
     this.client = new IoRedis(config_redis.redis.url)
   }
 
-  public async save<T> (key: string, value: T, ttl = seconds): Promise<void> {
+  public async save<T = unknown> (key: string, value: T, ttl = seconds): Promise<void> {
     await this.client.set(key, JSON.stringify(value), 'EX', ttl)
   }
 
-  public async recover<T> (key: string): Promise<T | null> {
+  public async recover<T = unknown> (key: string): Promise<T | null> {
     const data = await this.client.get(key)
-    if (!data) return null
+    if (data) return JSON.parse(data) as T
 
-    const parseData = JSON.parse(data) as T
-    return parseData
+    return null
   }
 
   public async invalidate (key: string): Promise<void> {
