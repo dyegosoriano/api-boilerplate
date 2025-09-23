@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 
-import { IRole, IUser } from '../domains/models/IUser'
+import type { IRole, IUser } from '../domains/models/IUser'
 
 export class User implements IUser {
   id: string
@@ -13,7 +13,7 @@ export class User implements IUser {
   updated_at: Date
   created_at: Date
 
-  constructor () {
+  constructor() {
     if (!this.id) {
       this.created_at = new Date()
       this.updated_at = new Date()

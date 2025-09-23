@@ -2,10 +2,11 @@ import 'reflect-metadata'
 import 'express-async-errors'
 import 'dotenv/config'
 
-import express, { Application } from 'express'
+import express, { type Application } from 'express'
 import helmet from 'helmet'
 
 import '@shared/container'
+
 import { ensureSSL } from './middlewares/ensureSSL'
 import errorHandling from './middlewares/errorHandling'
 import { expressSetupRoutes } from './utils/expressSetupRoutes'
@@ -13,7 +14,7 @@ import { expressSetupRoutes } from './utils/expressSetupRoutes'
 export class AppServer {
   private readonly server: Application
 
-  constructor () {
+  constructor() {
     this.server = express()
 
     this.middlewares()
@@ -21,7 +22,7 @@ export class AppServer {
     this.errorsHandler()
   }
 
-  start (port: number, callback?: Function) {
+  start(port: number, callback?: Function) {
     return this.server.listen(port, () => {
       console.info(`🚀 Server is running port: ${port}`)
       console.info(`Worker started pid: ${process.pid}`)
@@ -30,12 +31,12 @@ export class AppServer {
     })
   }
 
-  private errorsHandler () {
+  private errorsHandler() {
     this.server.use(errorHandling.notFound)
     this.server.use(errorHandling.globalErrors)
   }
 
-  private middlewares () {
+  private middlewares() {
     if (process.env.NODE_ENV === 'production') this.server.use(ensureSSL)
 
     this.server.disable('x-powered-by')
@@ -44,7 +45,7 @@ export class AppServer {
     this.server.use(express.json())
   }
 
-  private routes () {
+  private routes() {
     expressSetupRoutes(this.server)
   }
 }

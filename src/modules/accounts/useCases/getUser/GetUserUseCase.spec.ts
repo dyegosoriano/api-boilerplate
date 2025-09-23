@@ -1,10 +1,10 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { beforeAll, describe, expect, it } from 'vitest'
 
-import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
+import type { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
 import { UsersRepositoryInMemory } from '@modules/accounts/infra/fakes/UsersRepositoryInMemory'
+
 import { BcryptHashProvider } from '@shared/container/providers/HashProvider/implementations/BcryptHashProvider'
-import { IHashProvider } from '@shared/container/providers/HashProvider/models/IHashProvider'
+import type { IHashProvider } from '@shared/container/providers/HashProvider/models/IHashProvider'
 import { AppError } from '@shared/errors/AppError'
 
 import { CreateUserUseCase } from '../createUser/CreateUserUseCase'

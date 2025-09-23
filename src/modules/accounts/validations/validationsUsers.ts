@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 import { errors } from '@shared/errors/constants'
+
 const regex_password = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/
 
 export const validationCreateUser = z.object({

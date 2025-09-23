@@ -1,3 +1,3 @@
-import { RefreshTokens } from '@prisma/client'
+import type { RefreshTokens } from '@prisma/client'
 
 export type IRefreshToken = RefreshTokens

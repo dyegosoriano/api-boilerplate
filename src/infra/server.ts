@@ -8,7 +8,7 @@ const app = new AppServer()
 
 const server = app.start(port)
 
-function gracefulShutdown (_code: string) {
+function gracefulShutdown(_code: string) {
   return (event: any) => {
     console.info(`${event} signal received with code ${event}`)
     console.info('Closing http server...')

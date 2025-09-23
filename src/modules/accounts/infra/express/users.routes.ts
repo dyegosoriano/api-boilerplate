@@ -1,10 +1,11 @@
 import { Router } from 'express'
 
-import { ensureAuthenticate } from '@infra/express/middlewares/ensureAuthenticate'
-import { permissions } from '@infra/express/middlewares/permissions'
 import { CreateUserController } from '@modules/accounts/useCases/createUser/CreateUserController'
 import { GetUserController } from '@modules/accounts/useCases/getUser/GetUserController'
 import { ListUsersController } from '@modules/accounts/useCases/listUsers/ListUsersController'
+
+import { ensureAuthenticate } from '@infra/express/middlewares/ensureAuthenticate'
+import { permissions } from '@infra/express/middlewares/permissions'
 
 const createUserController = new CreateUserController()
 const listUsersController = new ListUsersController()

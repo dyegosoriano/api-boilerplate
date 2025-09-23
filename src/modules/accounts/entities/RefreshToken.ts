@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 
-import { IRefreshToken } from '../domains/models/IRefreshToken'
+import type { IRefreshToken } from '../domains/models/IRefreshToken'
 
 export class RefreshTokens implements IRefreshToken {
   id: string
@@ -12,7 +12,7 @@ export class RefreshTokens implements IRefreshToken {
   updated_at: Date
   created_at: Date
 
-  constructor () {
+  constructor() {
     if (!this.id) {
       this.created_at = new Date()
       this.updated_at = new Date()

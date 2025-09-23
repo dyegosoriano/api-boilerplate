@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { defineConfig } from 'tsup'
 
 // https://tsup.egoist.dev/#what-can-it-bundle

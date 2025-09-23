@@ -1,7 +1,8 @@
-import { prisma } from '@infra/prisma/client'
-import { ICreateRefreshTokensDTO, IFindByRefreshTokensDTO } from '@modules/accounts/domains/DTOs/IRefreshTokensDTOs'
-import { IRefreshTokensRepository } from '@modules/accounts/domains/repositories/IRefreshTokensRepository'
+import type { ICreateRefreshTokensDTO, IFindByRefreshTokensDTO } from '@modules/accounts/domains/DTOs/IRefreshTokensDTOs'
+import type { IRefreshTokensRepository } from '@modules/accounts/domains/repositories/IRefreshTokensRepository'
 import { RefreshTokens } from '@modules/accounts/entities/RefreshToken'
+
+import { prisma } from '@infra/prisma/client'
 
 export class RefreshTokensRepository implements IRefreshTokensRepository {
   async create({ expires_date, user_id }: ICreateRefreshTokensDTO): Promise<RefreshTokens> {

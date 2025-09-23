@@ -9,8 +9,6 @@ const refreshTokenController = new RefreshTokenController()
 const path_route = '/authenticate'
 const routes = Router()
 
-routes
-  .post(path_route + '/refresh-token', refreshTokenController.handle)
-  .post(path_route + '/sessions', authenticateUserController.handle)
+routes.post(path_route + '/refresh-token', refreshTokenController.handle).post(path_route + '/sessions', authenticateUserController.handle)
 
 export { routes }

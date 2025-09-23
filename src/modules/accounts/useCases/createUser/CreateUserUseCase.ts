@@ -1,21 +1,23 @@
 import { inject, injectable } from 'tsyringe'
 
-import { IUseCase } from '@core/types/structures/IUseCase'
-import { ICreateUserDTO, IUserResponseDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
-import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
+import type { ICreateUserDTO, IUserResponseDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
+import type { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
 import { UserMap } from '@modules/accounts/mappers/UserMap'
 import { validationCreateUser } from '@modules/accounts/validations/validationsUsers'
-import { IHashProvider } from '@shared/container/providers/HashProvider/models/IHashProvider'
+
+import type { IHashProvider } from '@shared/container/providers/HashProvider/models/IHashProvider'
 import { AppError } from '@shared/errors/AppError'
+
+import type { IUseCase } from '@core/types/structures/IUseCase'
 
 @injectable()
 export class CreateUserUseCase implements IUseCase<IUserResponseDTO> {
-  constructor (
+  constructor(
     @inject('UsersRepository') private readonly usersRepository: IUsersRepository,
     @inject('HashProvider') private readonly hashProvider: IHashProvider
   ) {}
 
-  async execute (data: ICreateUserDTO) {
+  async execute(data: ICreateUserDTO) {
     const valid_data = validationCreateUser.parse(data)
 
     const userAlreadyExists = await this.usersRepository.findByEmail(valid_data.email)

@@ -1,4 +1,4 @@
-import Bull from 'bull'
+import type Bull from 'bull'
 
 export interface IQueueClient {
   add(name: string, data: object, options?: Bull.JobOptions): void

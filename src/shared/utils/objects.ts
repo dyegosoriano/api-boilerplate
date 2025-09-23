@@ -8,7 +8,7 @@ export const filterObject = (object: any, removeItems?: string[]): any => {
   return clean_object
 }
 
-export function clearObject (object: any, removeItems?: string[]): void {
+export function clearObject(object: any, removeItems?: string[]): void {
   for (const prop in object) {
     if (object[prop] === undefined) delete object[prop]
     if (object[prop] === null) delete object[prop]

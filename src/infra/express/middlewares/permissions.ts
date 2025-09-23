@@ -1,9 +1,10 @@
-import { NextFunction, Request, Response } from 'express'
+import type { NextFunction, Request, Response } from 'express'
 
-import { IRole } from '@modules/accounts/domains/models/IUser'
+import type { IRole } from '@modules/accounts/domains/models/IUser'
+
 import { AppError } from '@shared/errors/AppError'
 
-export function permissions (rolesRoutes: IRole[]) {
+export function permissions(rolesRoutes: IRole[]) {
   return (request: Request, _response: Response, next: NextFunction): void => {
     const { user } = request
 

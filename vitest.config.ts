@@ -1,5 +1,4 @@
 import path from 'path'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { configDefaults, defineConfig } from 'vitest/config'
 
 const resolvePath = (p: string) => path.resolve(__dirname, p)

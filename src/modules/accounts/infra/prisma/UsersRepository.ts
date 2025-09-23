@@ -1,9 +1,11 @@
-import { IFindAllResults } from '@core/types/utils/IFindAllResults'
-import { prisma } from '@infra/prisma/client'
-import { ICreateUserDTO, IFindAllUsersDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
-import { IUser } from '@modules/accounts/domains/models/IUser'
-import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
+import type { ICreateUserDTO, IFindAllUsersDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
+import type { IUser } from '@modules/accounts/domains/models/IUser'
+import type { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
 import { User } from '@modules/accounts/entities/User'
+
+import { prisma } from '@infra/prisma/client'
+
+import type { IFindAllResults } from '@core/types/utils/IFindAllResults'
 
 export class UsersRepository implements IUsersRepository {
   async create({ password, email, name }: ICreateUserDTO): Promise<IUser> {

@@ -1,2 +1,2 @@
-export * from './paginateArray'
 export * from './objects'
+export * from './paginateArray'

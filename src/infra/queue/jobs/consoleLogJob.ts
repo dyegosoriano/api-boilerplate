@@ -1,4 +1,4 @@
-import { IJobQueue } from '@core/types/infra/IQueue'
+import type { IJobQueue } from '@core/types/infra/IQueue'
 
 class ConsoleLogJob implements IJobQueue {
   public key = 'ConsoleLog'
@@ -10,7 +10,7 @@ class ConsoleLogJob implements IJobQueue {
     priority: 1
   }
 
-  async handle ({ data }: any) {
+  async handle({ data }: any) {
     const maxTimeout = 60000 * 1
     const minTimeout = 5000
 

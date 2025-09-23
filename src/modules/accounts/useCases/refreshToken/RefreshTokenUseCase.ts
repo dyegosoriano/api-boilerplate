@@ -2,13 +2,15 @@ import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
 import { z } from 'zod'
 
-import { config_auth } from '@core/config/auth'
-import { IUseCase } from '@core/types/structures/IUseCase'
-import { IRefreshTokensRepository } from '@modules/accounts/domains/repositories/IRefreshTokensRepository'
-import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
-import { IDateProvider } from '@shared/container/providers/DateProvider/models/IDateProvider'
+import type { IRefreshTokensRepository } from '@modules/accounts/domains/repositories/IRefreshTokensRepository'
+import type { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
+
+import type { IDateProvider } from '@shared/container/providers/DateProvider/models/IDateProvider'
 import { AppError } from '@shared/errors/AppError'
 import { errors } from '@shared/errors/constants'
+
+import { config_auth } from '@core/config/auth'
+import type { IUseCase } from '@core/types/structures/IUseCase'
 
 const validationRefreshToken = z.object({ refresh_token: z.string().uuid(errors.id) })
 
@@ -17,13 +19,13 @@ type IResponse = { token: string }
 
 @injectable()
 export class RefreshTokenUseCase implements IUseCase<IResponse> {
-  constructor (
+  constructor(
     @inject('RefreshTokensRepository') private readonly refreshTokensRepository: IRefreshTokensRepository,
     @inject('UsersRepository') private readonly usersRepository: IUsersRepository,
     @inject('DateProvider') private readonly dateProvider: IDateProvider
   ) {}
 
-  async execute (data: IRequest) {
+  async execute(data: IRequest) {
     const valid_data = validationRefreshToken.parse(data)
 
     const refreshTokenAlreadyExists = await this.refreshTokensRepository.findByRefreshToken(valid_data)

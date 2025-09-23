@@ -1,12 +1,12 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { beforeAll, describe, expect, it } from 'vitest'
 
-import { IRefreshTokensRepository } from '@modules/accounts/domains/repositories/IRefreshTokensRepository'
-import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
+import type { IRefreshTokensRepository } from '@modules/accounts/domains/repositories/IRefreshTokensRepository'
+import type { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
 import { RefreshTokensRepositoryInMemory } from '@modules/accounts/infra/fakes/RefreshTokensRepositoryInMemory'
 import { UsersRepositoryInMemory } from '@modules/accounts/infra/fakes/UsersRepositoryInMemory'
+
 import { DayjsDateProvider } from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
-import { IDateProvider } from '@shared/container/providers/DateProvider/models/IDateProvider'
+import type { IDateProvider } from '@shared/container/providers/DateProvider/models/IDateProvider'
 import { AppError } from '@shared/errors/AppError'
 
 import { RefreshTokenUseCase } from './RefreshTokenUseCase'
@@ -32,8 +32,8 @@ describe('RefreshTokenUseCase', () => {
   })
 
   it('should not be able to refresh a token with invalid refresh token', async () => {
-    await expect(
-      refreshTokenUseCase.execute({ refresh_token: 'cc9c8edf-d252-453f-b362-ae75ce1dc9cb' })
-    ).rejects.toEqual(new AppError('Refresh token does not exist'))
+    await expect(refreshTokenUseCase.execute({ refresh_token: 'cc9c8edf-d252-453f-b362-ae75ce1dc9cb' })).rejects.toEqual(
+      new AppError('Refresh token does not exist')
+    )
   })
 })

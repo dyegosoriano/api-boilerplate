@@ -1,16 +1,18 @@
-import { NextFunction, Request, Response } from 'express'
+import type { NextFunction, Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'
 
-import { config_auth } from '@core/config/auth'
-import { IRole } from '@modules/accounts/domains/models/IUser'
+import type { IRole } from '@modules/accounts/domains/models/IUser'
+
 import { AppError } from '@shared/errors/AppError'
+
+import { config_auth } from '@core/config/auth'
 
 interface IPayload {
   roles: IRole[]
   sub: string
 }
 
-export async function ensureAuthenticate (request: Request, _response: Response, next: NextFunction): Promise<void> {
+export async function ensureAuthenticate(request: Request, _response: Response, next: NextFunction): Promise<void> {
   const authHeader = request.headers.authorization
 
   if (!authHeader) throw new AppError('Token missing', 401)
@@ -24,7 +26,7 @@ export async function ensureAuthenticate (request: Request, _response: Response,
     request.user = { id: user_id, roles }
 
     next()
-  } catch (error) {
+  } catch (_error) {
     throw new AppError('Invalid Token', 401)
   }
 }

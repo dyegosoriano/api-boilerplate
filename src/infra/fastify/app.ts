@@ -1,18 +1,18 @@
-import fastify, { FastifyInstance } from 'fastify'
+import fastify, { type FastifyInstance } from 'fastify'
 
 import { routes } from './routes'
 
 export class AppServer {
   private readonly server: FastifyInstance
 
-  constructor () {
+  constructor() {
     this.server = fastify({ logger: true })
 
     this.middlewares()
     this.routes()
   }
 
-  start (port: number, callback?: Function) {
+  start(port: number, callback?: Function) {
     this.server.listen(port, '0.0.0.0', (error: Error | null, url: string) => {
       if (!error) {
         console.info(`🚀 Server is running on ${url}`)
@@ -28,9 +28,9 @@ export class AppServer {
     })
   }
 
-  private middlewares () {}
+  private middlewares() {}
 
-  private routes () {
+  private routes() {
     this.server.register(routes)
   }
 }

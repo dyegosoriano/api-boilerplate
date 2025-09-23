@@ -1,18 +1,18 @@
 import JobQueue from 'bull'
 
 import { config_redis } from '@core/config/redis'
-import { IQueue, IQueueClient } from '@core/types/infra/IQueue'
+import type { IQueue, IQueueClient } from '@core/types/infra/IQueue'
 
 import * as jobs from './jobs'
 
 class QueueClient implements IQueueClient {
   private queues: IQueue[]
 
-  constructor () {
+  constructor() {
     this.init()
   }
 
-  private init () {
+  private init() {
     const queues = Object.values(jobs).map(job => ({
       bull: new JobQueue(job.key, {
         redis: {
@@ -31,7 +31,7 @@ class QueueClient implements IQueueClient {
     console.log('Queue initialized successfully! 🚀 ')
   }
 
-  public add (name: string, data: object, options?: JobQueue.JobOptions) {
+  public add(name: string, data: object, options?: JobQueue.JobOptions) {
     const queue = this.queues.find((queue: IQueue) => queue.name === name)
 
     if (queue) {
@@ -40,7 +40,7 @@ class QueueClient implements IQueueClient {
     }
   }
 
-  public process () {
+  public process() {
     return this.queues.forEach(queue => {
       queue.bull.process(queue.handle)
 

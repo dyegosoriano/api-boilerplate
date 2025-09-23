@@ -1,17 +1,18 @@
 import { inject, injectable } from 'tsyringe'
 
-import { IUseCase } from '@core/types/structures/IUseCase'
-import { IResultList } from '@core/types/utils/IResultList'
-import { IFindAllUsersDTO, IUserResponseDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
-import { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
+import type { IFindAllUsersDTO, IUserResponseDTO } from '@modules/accounts/domains/DTOs/IUsersDTOs'
+import type { IUsersRepository } from '@modules/accounts/domains/repositories/IUsersRepository'
 import { UserMap } from '@modules/accounts/mappers/UserMap'
 import { validationListUsers } from '@modules/accounts/validations/validationsUsers'
 
+import type { IUseCase } from '@core/types/structures/IUseCase'
+import type { IResultList } from '@core/types/utils/IResultList'
+
 @injectable()
 export class ListUsersUseCase implements IUseCase<IResultList<IUserResponseDTO>> {
-  constructor (@inject('UsersRepository') private readonly usersRepository: IUsersRepository) {}
+  constructor(@inject('UsersRepository') private readonly usersRepository: IUsersRepository) {}
 
-  async execute (data: IFindAllUsersDTO) {
+  async execute(data: IFindAllUsersDTO) {
     const valid_data = validationListUsers.parse(data)
 
     const { total, results } = await this.usersRepository.findAll(valid_data)

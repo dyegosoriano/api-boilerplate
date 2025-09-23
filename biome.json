@@ -12,8 +12,11 @@
               [":NODE:", ":BUN:", ":URL:"],
               ":BLANK_LINE:",
               "@modules/**",
+              ":BLANK_LINE:",
               "@shared/**",
+              ":BLANK_LINE:",
               "@infra/**",
+              ":BLANK_LINE:",
               "@core/**",
               ":BLANK_LINE:",
               [":PATH:"]
@@ -30,31 +33,33 @@
   },
 
   "formatter": {
-    "enabled": true,
     "formatWithErrors": false,
     "indentStyle": "space",
-    "indentWidth": 2,
     "lineEnding": "lf",
-    "lineWidth": 140
+    "indentWidth": 2,
+    "lineWidth": 140,
+
+    "enabled": true
   },
 
   "javascript": {
+    "parser": { "unsafeParameterDecoratorsEnabled": true },
     "formatter": {
       "arrowParentheses": "asNeeded",
-      "quoteStyle": "single",
+      "trailingCommas": "none",
       "semicolons": "asNeeded",
-      "trailingCommas": "none"
+      "quoteStyle": "single"
     }
   },
 
   "linter": {
     "enabled": true,
     "rules": {
-      "complexity": { "noUselessConstructor": "off" },
+      "complexity": { "noUselessConstructor": "off", "noExtraBooleanCast": "off" },
       "correctness": { "noUnusedVariables": "error", "noVoidTypeReturn": "off" },
-      "recommended": true,
       "style": { "noUnusedTemplateLiteral": "error", "useConst": "error" },
-      "suspicious": { "noArrayIndexKey": "warn", "noExplicitAny": "warn" }
+      "suspicious": { "noArrayIndexKey": "warn", "noExplicitAny": "warn" },
+      "recommended": true
     }
   }
 }

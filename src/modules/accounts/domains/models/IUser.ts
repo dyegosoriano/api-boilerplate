@@ -1,4 +1,4 @@
-import { Users } from '@prisma/client'
+import type { Users } from '@prisma/client'
 
 export type IRole = 'ADMIN' | 'USER'
 
