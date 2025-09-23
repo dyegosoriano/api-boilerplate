@@ -1,6 +1,6 @@
 import { container } from 'tsyringe'
 
-import { DayjsDateProvider } from './implementations/DayjsDateProvider'
+import { NodeDateProvider } from './implementations/NodeDateProvider'
 import type { IDateProvider } from './models/IDateProvider'
 
-container.registerSingleton<IDateProvider>('DateProvider', DayjsDateProvider)
+container.registerSingleton<IDateProvider>('DateProvider', NodeDateProvider)
