@@ -1,0 +1,70 @@
+services:
+  api:
+    container_name: boilerplate-api
+    command: yarn dev:server
+    restart: unless-stopped
+    build: .
+    volumes:
+      - .:/usr/app
+    environment:
+      - DATABASE_URL=boilerplate-postgres
+      - REDIS_URL=boilerplate-redis
+    env_file:
+      - .env.development
+    ports:
+      - ${PORT}:${PORT}
+      - 9229:9229
+    networks:
+      - boilerplate
+    depends_on:
+      - postgres
+      - redis
+
+  postgres: # https://hub.docker.com/r/bitnami/postgresql
+    image: bitnami/postgresql:16
+    container_name: boilerplate-postgres
+    restart: unless-stopped
+    volumes:
+      - .docker/data/postgres:/bitnami/postgresql
+      - .docker/backup:/backup
+    environment:
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
+      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+    env_file:
+      - .env.development
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.1'
+    ports:
+      - '5432:5432'
+    networks:
+      - boilerplate
+
+  redis: # https://hub.docker.com/r/bitnami/redis
+    image: bitnami/redis:latest
+    container_name: boilerplate-redis
+    command: /opt/bitnami/scripts/redis/run.sh --maxmemory 250mb
+    restart: unless-stopped
+    volumes:
+      - .docker/data/redis:/bitnami/redis/data
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - ALLOW_EMPTY_PASSWORD=yes
+    env_file:
+      - .env.development
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+          cpus: '0.1'
+    ports:
+      - '6379:6379'
+    networks:
+      - boilerplate
+
+networks:
+  boilerplate:
+    driver: bridge

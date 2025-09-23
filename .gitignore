@@ -1,13 +1,14 @@
 # files you don't want in your repo
-.docker/nginx/*
+.docker/*
 
 node_modules
 coverage
 tmp/*
 dist
 
-.eslintcache
+.env.development
 .env
 
-!docker/nginx/.gitkeep
+!docker/backup/.gitkeep
+!docker/data/.gitkeep
 !tmp/.gitkeep
