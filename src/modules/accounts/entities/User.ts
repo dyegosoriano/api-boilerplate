@@ -1,4 +1,4 @@
-import { v4 as uuid } from 'uuid'
+import { v7 as uuid } from 'uuid'
 
 import type { IRole, IUser } from '../domains/models/IUser'
 
