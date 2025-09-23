@@ -5,7 +5,7 @@ import type { IUsersRepository } from '@modules/accounts/domains/repositories/IU
 import { RefreshTokensRepositoryInMemory } from '@modules/accounts/infra/fakes/RefreshTokensRepositoryInMemory'
 import { UsersRepositoryInMemory } from '@modules/accounts/infra/fakes/UsersRepositoryInMemory'
 
-import { DayjsDateProvider } from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
+import { NodeDateProvider } from '@shared/container/providers/DateProvider/implementations/NodeDateProvider'
 import type { IDateProvider } from '@shared/container/providers/DateProvider/models/IDateProvider'
 import { AppError } from '@shared/errors/AppError'
 
@@ -20,7 +20,7 @@ describe('RefreshTokenUseCase', () => {
   beforeAll(async () => {
     refreshTokensRepository = new RefreshTokensRepositoryInMemory()
     userRepository = new UsersRepositoryInMemory()
-    dateProvider = new DayjsDateProvider()
+    dateProvider = new NodeDateProvider()
 
     refreshTokenUseCase = new RefreshTokenUseCase(refreshTokensRepository, userRepository, dateProvider)
   })

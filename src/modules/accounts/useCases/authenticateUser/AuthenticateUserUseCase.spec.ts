@@ -6,7 +6,7 @@ import type { IUsersRepository } from '@modules/accounts/domains/repositories/IU
 import { RefreshTokensRepositoryInMemory } from '@modules/accounts/infra/fakes/RefreshTokensRepositoryInMemory'
 import { UsersRepositoryInMemory } from '@modules/accounts/infra/fakes/UsersRepositoryInMemory'
 
-import { DayjsDateProvider } from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
+import { NodeDateProvider } from '@shared/container/providers/DateProvider/implementations/NodeDateProvider'
 import type { IDateProvider } from '@shared/container/providers/DateProvider/models/IDateProvider'
 import { BcryptHashProvider } from '@shared/container/providers/HashProvider/implementations/BcryptHashProvider'
 import type { IHashProvider } from '@shared/container/providers/HashProvider/models/IHashProvider'
@@ -30,7 +30,7 @@ describe('AuthenticateUserUseCase', () => {
     refreshTokensRepository = new RefreshTokensRepositoryInMemory()
     userRepository = new UsersRepositoryInMemory()
     hashProvider = new BcryptHashProvider()
-    dateProvider = new DayjsDateProvider()
+    dateProvider = new NodeDateProvider()
 
     createUserUseCase = new CreateUserUseCase(userRepository, hashProvider)
     authenticateUserUseCase = new AuthenticateUserUseCase(refreshTokensRepository, userRepository, hashProvider, dateProvider)
