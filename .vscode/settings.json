@@ -1,11 +1,18 @@
 {
   "cSpell.words": ["commitlint", "dayjs", "prestart", "respawn"],
-  "code-runner.executorMap": { "typescript": "yarn tsx" },
-  "editor.formatOnPaste": false,
+
+  "prettier.enable": false,
+  "eslint.enable": false,
+  "biome.enabled": true,
+
+  "editor.codeActionsOnSave": { "source.organizeImports.biome": "explicit", "source.fixAll.biome": "explicit" },
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
-  "[prisma]": {
-    "editor.defaultFormatter": "Prisma.prisma",
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true
-  }
+
+  "[prisma]": { "editor.defaultFormatter": "Prisma.prisma", "editor.formatOnPaste": true, "editor.formatOnSave": true },
+  "[typescript]": { "editor.defaultFormatter": "biomejs.biome" },
+  "[javascript]": { "editor.defaultFormatter": "biomejs.biome" },
+  "[jsonc]": { "editor.defaultFormatter": "biomejs.biome" },
+  "[json]": { "editor.defaultFormatter": "biomejs.biome" }
 }

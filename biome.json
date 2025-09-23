@@ -1,0 +1,60 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              [":PACKAGE:", ":PACKAGE_WITH_PROTOCOL:", "!@modules/**", "!@shared/**", "!@infra/**", "!@core/**"],
+              [":NODE:", ":BUN:", ":URL:"],
+              ":BLANK_LINE:",
+              "@modules/**",
+              "@shared/**",
+              "@infra/**",
+              "@core/**",
+              ":BLANK_LINE:",
+              [":PATH:"]
+            ]
+          }
+        }
+      }
+    },
+    "enabled": true
+  },
+
+  "files": {
+    "includes": ["src/**/*", "*.ts", "*.js"]
+  },
+
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 140
+  },
+
+  "javascript": {
+    "formatter": {
+      "arrowParentheses": "asNeeded",
+      "quoteStyle": "single",
+      "semicolons": "asNeeded",
+      "trailingCommas": "none"
+    }
+  },
+
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "complexity": { "noUselessConstructor": "off" },
+      "correctness": { "noUnusedVariables": "error", "noVoidTypeReturn": "off" },
+      "recommended": true,
+      "style": { "noUnusedTemplateLiteral": "error", "useConst": "error" },
+      "suspicious": { "noArrayIndexKey": "warn", "noExplicitAny": "warn" }
+    }
+  }
+}
