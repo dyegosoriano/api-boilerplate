@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.6](https://github.com/dyegosoriano/api-boilerplate/compare/v1.6.5...v1.6.6) (2025-09-30)
+
+
+### Bug Fixes
+
+* correction of unit tests ([a80cdcc](https://github.com/dyegosoriano/api-boilerplate/commit/a80cdcc26c17e1ecd260e7ef270ead06f5c96fac))
+
 ### [1.6.5](https://github.com/dyegosoriano/api-boilerplate/compare/v1.6.4...v1.6.5) (2025-09-23)
 
 ### [1.6.4](https://github.com/dyegosoriano/api-boilerplate/compare/v1.6.3...v1.6.4) (2024-02-13)
