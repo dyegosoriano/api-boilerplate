@@ -49,9 +49,6 @@ export class AuthenticateUserUseCase implements IUseCase<IUserResponseDTO & IAut
 
     const response = UserMap.toDTO(user)
 
-    return {
-      ...response,
-      authentication: { refresh_token, token }
-    }
+    return { ...response, authentication: { refresh_token, token } }
   }
 }

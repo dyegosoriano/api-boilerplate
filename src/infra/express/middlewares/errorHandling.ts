@@ -16,10 +16,7 @@ export default {
       return res.status(400).json({
         statusCode: 400,
         success: false,
-        message: {
-          errors: error.issues.map(issue => issue.message),
-          path: error?.errors.map(error => error.path)
-        }
+        message: error.issues.map(issue => issue.message)
       })
     }
 
