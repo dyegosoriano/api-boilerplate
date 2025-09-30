@@ -55,10 +55,10 @@
   "linter": {
     "enabled": true,
     "rules": {
+      "style": { "noUnusedTemplateLiteral": "error", "useTemplate": "off", "useConst": "error" },
       "complexity": { "noUselessConstructor": "off", "noExtraBooleanCast": "off" },
       "correctness": { "noUnusedVariables": "error", "noVoidTypeReturn": "off" },
       "suspicious": { "noArrayIndexKey": "warn", "noExplicitAny": "warn" },
-      "style": { "noUnusedTemplateLiteral": "error", "useConst": "error" },
       "recommended": true
     }
   }
